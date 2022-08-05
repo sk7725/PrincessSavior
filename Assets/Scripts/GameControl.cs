@@ -8,6 +8,7 @@ public class GameControl : MonoBehaviour
 
     [HideInInspector] public PlayerControl player;
     [HideInInspector] public Camera cam;
+    [HideInInspector] public CameraControl camc;
 
     public bool scrollCamera = false;
 
@@ -15,5 +16,6 @@ public class GameControl : MonoBehaviour
         main = this; //behold, the laziest singleton(tm) 2; electric boogaloo
         player = GameObject.FindObjectOfType<PlayerControl>();
         cam = Camera.main;
+        camc = cam.GetComponent<CameraControl>();
     }
 }

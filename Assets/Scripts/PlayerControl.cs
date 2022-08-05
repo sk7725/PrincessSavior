@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     [Header("Settings")]
     public float poundStr = 5f;
     public float throwStr = 5f, bounceStr = 15f;
+    public float maxDragLength = 3f;
     [SerializeField] private Vector3 throwTorque;
     [SerializeField] private Vector2 throwOffset;
     [SerializeField] private Quaternion throwRotation = Quaternion.identity;
@@ -25,7 +26,7 @@ public class PlayerControl : MonoBehaviour
     public State state, nextState;
     public float stateTime = 0f; //time after a state change
 
-    public bool landed;
+    public bool landed, pounding;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] private Collider col;
     private float swordOffset;
@@ -54,6 +55,7 @@ public class PlayerControl : MonoBehaviour
         nextState = State.idle;
         swordOffset = sword.playerOffset;
         sword.gameObject.SetActive(false);
+        landed = pounding = false;
     }
 
     void Update()
@@ -111,6 +113,10 @@ public class PlayerControl : MonoBehaviour
         switch (state) {
             case State.pound:
                 if(stateTime > animTime.pound) {
+                    if (!pounding) {
+                        rigid.velocity = Vector3.zero;
+                        pounding = true;
+                    }
                     rigid.AddForce(Vector3.down * poundStr, ForceMode.VelocityChange);
                 }
                 else {
@@ -176,10 +182,13 @@ public class PlayerControl : MonoBehaviour
         sword.rigid.angularVelocity = throwTorque;
         sword.Init();
         Fx(throwFx, transform.position + (Vector3)throwOffset, throwRotation);
+
+        GameControl.main.camc.UpdateTarget();
     }
 
     private void CatchSword() {
         //set player pos to sword pos + sword offset
+        transform.position = sword.GetPlayerPos();
         rigid.MovePosition(sword.GetPlayerPos());
         //todo set playerrenderer pos to true sword pos
         //renderer.transform.position = sword.GetPosition(true);
@@ -187,6 +196,8 @@ public class PlayerControl : MonoBehaviour
         rigid.velocity = (Vector2)sword.rigid.velocity;
         sword.gameObject.SetActive(false);
         Fx(catchFx);
+
+        GameControl.main.camc.UpdateTarget();
     }
 
     private Vector2 FingerPos() {
@@ -194,7 +205,8 @@ public class PlayerControl : MonoBehaviour
     }
 
     public Vector2 ThrowVector() {
-        return -(dragCurrentPos - dragStartPos) * throwStr;
+        float cstr = (dragCurrentPos - dragStartPos).magnitude;
+        return -(dragCurrentPos - dragStartPos) / cstr * (cstr > maxDragLength ? maxDragLength : cstr) * throwStr;
     }
 
     //todo pool fx

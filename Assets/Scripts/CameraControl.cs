@@ -18,7 +18,7 @@ public class CameraControl : MonoBehaviour
         targetPos = GameControl.main.player.transform.position + playerCameraOffset;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (GameControl.main.player.state != PlayerControl.State.none) {
             UpdateTarget();
@@ -35,7 +35,7 @@ public class CameraControl : MonoBehaviour
         else transform.position = targetPos;
     }
 
-    private void UpdateTarget() {
+    public void UpdateTarget() {
         if (GameControl.main.player.sword.gameObject.activeInHierarchy) {
             targetPos = GameControl.main.player.sword.transform.position + currentOffset;
             targetOffset = new Vector3(0, 0, playerCameraOffset.z);

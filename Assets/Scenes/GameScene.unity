@@ -254,6 +254,7 @@ MonoBehaviour:
   poundStr: 5
   throwStr: 5
   bounceStr: 15
+  maxDragLength: 7
   throwTorque: {x: 0, y: 45, z: 0}
   throwOffset: {x: 0, y: 0}
   throwRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
@@ -269,6 +270,7 @@ MonoBehaviour:
   nextState: 0
   stateTime: 0
   landed: 0
+  pounding: 0
   rigid: {fileID: 0}
   dragged: 0
 --- !u!1 &656818627
@@ -777,6 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   cam: {fileID: 0}
+  camc: {fileID: 0}
   scrollCamera: 0
 --- !u!1 &1971247278
 GameObject:
