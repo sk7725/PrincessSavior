@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public const float MIN_DRAG_LEN2 = 0.15f, HEIGHT = 2f;
+    private const float INVIN_TIME = 0.5f;
 
     [Header("Settings")]
     public float poundStr = 5f;
@@ -13,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Vector3 throwTorque;
     [SerializeField] private Vector2 throwOffset;
     [SerializeField] private Quaternion throwRotation = Quaternion.identity;
+    public float maxHealth = 100f;
 
     //preset fields
     [Header("Preset Fields")]
@@ -23,7 +25,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Fx")]
     public GameObject poundFx;
-    public GameObject throwFx, catchFx, swordBounceFx, catchPrevFx;
+    public GameObject throwFx, catchFx, swordBounceFx, catchPrevFx, swordHitFx;
 
     public State state, nextState;
     public float stateTime = 0f; //time after a state change
@@ -33,6 +35,9 @@ public class PlayerControl : MonoBehaviour
     [HideInInspector] private Collider col;
     private float swordOffset, landBounceTimer;
     private Quaternion? targetRotation;
+
+    [System.NonSerialized] public float health;
+    private float invincibility;
 
     //inputs
     public bool dragged;
@@ -50,6 +55,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake() {
         rigid = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        health = maxHealth;
     }
 
     void Start()
@@ -67,6 +73,7 @@ public class PlayerControl : MonoBehaviour
         CheckLanded();
         UpdateInput();
         bool updateTransform = true; //update animator transform
+        if(invincibility > 0) invincibility -= Time.deltaTime;
 
         //AUTO STATE CHANGE
         if (nextState == State.none) {
@@ -87,7 +94,7 @@ public class PlayerControl : MonoBehaviour
                         //check if sword is airborne
                         //if not, yeet sword up and then switch to pick
                         if (sword.landed) {
-                            sword.rigid.velocity = Vector3.up * bounceStr;
+                            sword.rigid.velocity = Vector3.up * bounceStr + (dragStartPos.x > dragCurrentPos.x ? Vector3.right : Vector3.left) * bounceStr * 0.02f;
                             landBounce = true;
                             landBounceTimer = 0;
                             Fx(swordBounceFx, sword.transform.position, Quaternion.identity);
@@ -163,7 +170,6 @@ public class PlayerControl : MonoBehaviour
                         if (dragv.sqrMagnitude > MIN_DRAG_LEN2) {
                             nextState = State.preThrow;
                         }
-                        Debug.Log(dragCurrentPos);
                     }
                 }
                 else {
@@ -171,7 +177,6 @@ public class PlayerControl : MonoBehaviour
                         //start drag
                         dragged = true;
                         dragStartPos = dragCurrentPos = FingerPos();
-                        Debug.Log(dragStartPos);
                     }
                 }
                 break;
@@ -250,6 +255,32 @@ public class PlayerControl : MonoBehaviour
 
         heldSword.SetActive(true);
         GameControl.main.camc.UpdateTarget();
+    }
+
+    public void Damage(float damage, Enemy enemy = null) {
+        if(damage < 0f) {
+            health = Mathf.Min(health - damage, maxHealth);
+        }
+        else {
+            if (invincibility > 0) return;
+            if(enemy != null && pounding) {
+                //actually, the enemy should be dying
+                enemy.Damage(sword.poundDamage * sword.DamageMultiplier(), 8f, gameObject);
+            }
+            else {
+                health = Mathf.Min(health - damage, maxHealth);
+                invincibility = INVIN_TIME;
+                if (health <= 0f) Kill();
+                else if (enemy != null){
+                    //process knockback
+                    rigid.AddExplosionForce(enemy.knockback / 2f, enemy.transform.position, 10f, 0.2f, ForceMode.VelocityChange);
+                }
+            }
+        }
+    }
+
+    public void Kill() {
+        //todo death
     }
 
     private Vector2 FingerPos() {

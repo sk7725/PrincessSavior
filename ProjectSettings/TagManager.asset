@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - Ground
   - Ignore Player
   - Camera Plane
-  - 
-  - 
+  - Player Renderer
+  - Enemy
   - 
   - 
   - 

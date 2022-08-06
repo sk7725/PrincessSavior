@@ -7,9 +7,10 @@ public class Sword : MonoBehaviour
     private const float MOVE_THRESH2 = 0.05f;
 
     [Header("Settings")]
+    public float throwDamage = 8f, strikeDamage = 15f, poundDamage = 25f;
     public float playerOffset;
 
-    public bool landed;
+    [HideInInspector] public bool landed;
 
     [HideInInspector] public Rigidbody rigid;
     private float time = 0f;
@@ -41,4 +42,26 @@ public class Sword : MonoBehaviour
         //this is quite different from the susal landed checker, just check if it is moving
         landed = rigid.velocity.sqrMagnitude < MOVE_THRESH2 && time > 0.5f;
     }
+
+    //called by enemy (via triggerenter)
+    public void Hit(Enemy enemy) {
+        //1. deal damage to the enemy (from sword stats)
+        enemy.Damage(throwDamage * DamageMultiplier(), 3f, gameObject);
+        //2. take knockback by normal (if sword is not immune to knockback)
+        if (!IgnoreKnockback()) {
+            time = 0f;
+            rigid.AddExplosionForce(enemy.knockback, enemy.transform.position, 10f, 0.2f, ForceMode.VelocityChange);
+        }
+        GameControl.main.player.Fx(GameControl.main.player.swordHitFx, transform.position, transform.rotation);
+    }
+
+    #region stats
+    public float DamageMultiplier() {
+        return 1f;//todo
+    }
+
+    public bool IgnoreKnockback() {
+        return false;//todo
+    }
+    #endregion
 }
