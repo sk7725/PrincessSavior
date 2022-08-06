@@ -17,7 +17,9 @@ public class PlayerControl : MonoBehaviour
     //preset fields
     [Header("Preset Fields")]
     public Sword sword;
+    public GameObject heldSword;
     public AnimationTime animTime;
+    public PlayerRenderer animator;
 
     [Header("Fx")]
     public GameObject poundFx;
@@ -30,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] private Collider col;
     private float swordOffset, landBounceTimer;
+    private Quaternion? targetRotation;
 
     //inputs
     public bool dragged;
@@ -63,6 +66,7 @@ public class PlayerControl : MonoBehaviour
         stateTime += Time.deltaTime;
         CheckLanded();
         UpdateInput();
+        bool updateTransform = true; //update animator transform
 
         //AUTO STATE CHANGE
         if (nextState == State.none) {
@@ -114,6 +118,7 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case State.pound:
                     pounding = false;
+                    targetRotation = sword.rigid.velocity.x > 0 ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
                     CatchSword();
                     break;
             }
@@ -131,14 +136,13 @@ public class PlayerControl : MonoBehaviour
                     rigid.AddForce(Vector3.down * poundStr, ForceMode.VelocityChange);
                 }
                 else {
-                    //todo fuck
-                    //first, lerp animator position
-                    //  1. store current "sword" pos
-                    //  2. unoffset -> rotate -> reoffset
-                    //then, set player pos to animator pos
+                    //lerp animator z
+                    updateTransform = false;
                 }
                 break;
         }
+
+        UpdateAnimator(updateTransform);
     }
 
     private void UpdateInput() {
@@ -180,6 +184,40 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void UpdateAnimator(bool updateTransform) {
+        if(updateTransform) animator.transform.position = transform.position;
+
+        //UPDATE (per state)
+        switch (state) {
+            case State.idle:
+                if (dragged && Mathf.Abs(dragStartPos.x - dragCurrentPos.x) > 0.1f) {
+                    targetRotation = (dragCurrentPos.x < dragStartPos.x) ? Quaternion.identity : Quaternion.Euler(0, 179.9f, 0);
+                }
+                if(targetRotation != null) {
+                    animator.transform.rotation = Quaternion.Lerp(animator.transform.rotation, targetRotation.Value, 8f * Time.deltaTime);
+                    if(animator.transform.rotation.Similar(targetRotation.Value, 0.001f)) {
+                        animator.transform.rotation = targetRotation.Value;
+                        targetRotation = null;
+                    }
+                }
+                break;
+            case State.pound:
+                if (targetRotation != null) {
+                    animator.transform.rotation = Quaternion.Lerp(animator.transform.rotation, targetRotation.Value, 5f * Time.deltaTime);
+                    if (animator.transform.rotation.Similar(targetRotation.Value, 0.001f)) {
+                        animator.transform.rotation = targetRotation.Value;
+                        targetRotation = null;
+                    }
+                }
+
+                if (!updateTransform) {
+                    float z = Mathf.Lerp(animator.transform.position.z, 0, 5f * Time.deltaTime);
+                    animator.transform.position = new Vector3(transform.position.x, transform.position.y, z);
+                }
+                break;
+        }
+    }
+
     private void CheckLanded() {
         landed = Physics.CheckSphere(new Vector3(col.bounds.center.x, col.bounds.center.y - ((HEIGHT - 1f) / 2 + 0.15f), col.bounds.center.z), 0.45f, 1 << 6, QueryTriggerInteraction.Ignore);
     }
@@ -188,13 +226,13 @@ public class PlayerControl : MonoBehaviour
         landBounce = false;
         sword.gameObject.SetActive(true);
         sword.transform.position = transform.position + (Vector3)throwOffset;
-        //sword.rigid.MovePosition(transform.position + throwOffset);
         sword.rigid.MoveRotation(throwRotation);
         sword.rigid.velocity = ThrowVector();
         sword.rigid.angularVelocity = throwTorque;
         sword.Init();
         Fx(throwFx, transform.position + (Vector3)throwOffset, throwRotation);
 
+        heldSword.SetActive(false);
         GameControl.main.camc.UpdateTarget();
     }
 
@@ -203,13 +241,14 @@ public class PlayerControl : MonoBehaviour
         Fx(catchPrevFx);
         transform.position = sword.GetPlayerPos();
         rigid.MovePosition(sword.GetPlayerPos());
-        //todo set playerrenderer pos to true sword pos
-        //renderer.transform.position = sword.GetPosition(true);
-        //renderer.transform.rotation = sword.transform.rotation;
+        //set playerrenderer pos to true sword pos
+        animator.transform.position = sword.GetPlayerPos(true);
+        animator.transform.rotation = sword.transform.rotation;
         rigid.velocity = (Vector2)sword.rigid.velocity;
         sword.gameObject.SetActive(false);
         Fx(catchFx);
 
+        heldSword.SetActive(true);
         GameControl.main.camc.UpdateTarget();
     }
 
