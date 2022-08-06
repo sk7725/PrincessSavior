@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    private const float MIN_DRAG_LEN2 = 0.15f, HEIGHT = 2f;
+    public const float MIN_DRAG_LEN2 = 0.15f, HEIGHT = 2f;
 
     [Header("Settings")]
     public float poundStr = 5f;
@@ -21,15 +21,15 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Fx")]
     public GameObject poundFx;
-    public GameObject throwFx, catchFx;
+    public GameObject throwFx, catchFx, swordBounceFx, catchPrevFx;
 
     public State state, nextState;
     public float stateTime = 0f; //time after a state change
 
-    public bool landed, pounding;
+    public bool landed, pounding, landBounce;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] private Collider col;
-    private float swordOffset;
+    private float swordOffset, landBounceTimer;
 
     //inputs
     public bool dragged;
@@ -73,11 +73,21 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case State.thrown:
-                    //todo check if sword is airborne
-                    //if not, yeet sword up and then switch to pick
-                    if (sword.landed) {
-                        sword.rigid.velocity = Vector3.up * bounceStr;
-                        nextState = State.pound;
+                    if (landBounce) {
+                        landBounceTimer += Time.deltaTime;
+                        if(landBounceTimer >= animTime.landBounce) {
+                            nextState = State.pound;
+                        }
+                    }
+                    else {
+                        //check if sword is airborne
+                        //if not, yeet sword up and then switch to pick
+                        if (sword.landed) {
+                            sword.rigid.velocity = Vector3.up * bounceStr;
+                            landBounce = true;
+                            landBounceTimer = 0;
+                            Fx(swordBounceFx, sword.transform.position, Quaternion.identity);
+                        }
                     }
                     break;
                 case State.pound:
@@ -103,6 +113,7 @@ public class PlayerControl : MonoBehaviour
                     ThrowSword();
                     break;
                 case State.pound:
+                    pounding = false;
                     CatchSword();
                     break;
             }
@@ -174,6 +185,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void ThrowSword() {
+        landBounce = false;
         sword.gameObject.SetActive(true);
         sword.transform.position = transform.position + (Vector3)throwOffset;
         //sword.rigid.MovePosition(transform.position + throwOffset);
@@ -188,6 +200,7 @@ public class PlayerControl : MonoBehaviour
 
     private void CatchSword() {
         //set player pos to sword pos + sword offset
+        Fx(catchPrevFx);
         transform.position = sword.GetPlayerPos();
         rigid.MovePosition(sword.GetPlayerPos());
         //todo set playerrenderer pos to true sword pos
@@ -201,11 +214,12 @@ public class PlayerControl : MonoBehaviour
     }
 
     private Vector2 FingerPos() {
-        return GameControl.main.cam.ScreenToWorldPoint(Input.mousePosition);
+        return Input.mousePosition * Settings.FlingSensitivity / 10f;
     }
 
     public Vector2 ThrowVector() {
         float cstr = (dragCurrentPos - dragStartPos).magnitude;
+        if (cstr == 0) return Vector2.zero;
         return -(dragCurrentPos - dragStartPos) / cstr * (cstr > maxDragLength ? maxDragLength : cstr) * throwStr;
     }
 
@@ -221,6 +235,6 @@ public class PlayerControl : MonoBehaviour
 
     [System.Serializable]
     public class AnimationTime {
-        public float throwing, pound, pick;
+        public float throwing, pound, pick, landBounce;
     }
 }

@@ -10,7 +10,7 @@ public class GameControl : MonoBehaviour
     [HideInInspector] public Camera cam;
     [HideInInspector] public CameraControl camc;
 
-    public bool scrollCamera = false;
+    [HideInInspector] public bool scrollCamera = false;
 
     private void Awake() {
         main = this; //behold, the laziest singleton(tm) 2; electric boogaloo

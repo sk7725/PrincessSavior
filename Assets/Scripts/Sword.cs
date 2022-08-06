@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    private const float MOVE_THRESH2 = 0.1f;
+    private const float MOVE_THRESH2 = 0.05f;
 
     [Header("Settings")]
     public float playerOffset;
