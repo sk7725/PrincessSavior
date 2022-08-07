@@ -46,19 +46,16 @@ public class Sword : MonoBehaviour
     //called by enemy (via triggerenter)
     public void Hit(Enemy enemy) {
         //1. deal damage to the enemy (from sword stats)
-        enemy.Damage(throwDamage * DamageMultiplier(), 3f, gameObject);
+        enemy.Damage(throwDamage * GameControl.main.player.blade.damageMultiplier, 3f, gameObject);
         //2. take knockback by normal (if sword is not immune to knockback)
         if (!IgnoreKnockback()) {
             time = 0f;
             rigid.AddExplosionForce(enemy.knockback, enemy.transform.position, 10f, 0.2f, ForceMode.VelocityChange);
         }
-        GameControl.main.player.Fx(GameControl.main.player.swordHitFx, transform.position, transform.rotation);
+        GameControl.main.player.blade.OnThrownHit(transform.position, transform.rotation);
     }
 
     #region stats
-    public float DamageMultiplier() {
-        return 1f;//todo
-    }
 
     public bool IgnoreKnockback() {
         return false;//todo

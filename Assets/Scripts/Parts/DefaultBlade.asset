@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a944f5ab255967046b87a54a1af80311, type: 3}
+  m_Name: DefaultBlade
+  m_EditorClassIdentifier: 
+  localized: "\uC758\uC9C0\uC758 \uAC80\uB0A0"
+  cost: 0
+  mesh: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: e65fedec7474e3e45802c692a3d8bda7, type: 2}
+  damageMultiplier: 1
+  color:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.9184065, b: 1, a: 1}
+    key1: {r: 0.24372864, g: 0, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 43754
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  strikeFx: {fileID: 0}
+  throwFx: {fileID: 0}
+  poundFx: {fileID: 0}
+  thrownHitFx: {fileID: 0}
+  bounceFx: {fileID: 9001223473084519564, guid: e13b09ace12e0f447a139454416b3eb3, type: 3}

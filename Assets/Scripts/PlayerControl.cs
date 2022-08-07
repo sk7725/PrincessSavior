@@ -16,17 +16,24 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Quaternion throwRotation = Quaternion.identity;
     public float maxHealth = 100f;
 
+
+    [Header("Sword Parts")]
+    public Blade blade;
+
     //preset fields
     [Header("Preset Fields")]
     public Sword sword;
     public GameObject heldSword;
     public AnimationTime animTime;
     public PlayerRenderer animator;
+    [SerializeField] private SwordTrail swordTrail;
+    [SerializeField] private FlashProjector flash;
 
     [Header("Fx")]
-    public GameObject poundFx;
-    public GameObject throwFx, catchFx, swordBounceFx, catchPrevFx, swordHitFx;
+    public GameObject catchFx;
+    public GameObject catchPrevFx;
 
+    [Header("Debugging")]
     public State state, nextState;
     public float stateTime = 0f; //time after a state change
 
@@ -63,6 +70,10 @@ public class PlayerControl : MonoBehaviour
         state = State.none;
         nextState = State.idle;
         swordOffset = sword.playerOffset;
+
+        //equip parts
+        blade.Equip();
+        //todo handle & accessory equip
         sword.gameObject.SetActive(false);
         landed = pounding = false;
     }
@@ -97,12 +108,13 @@ public class PlayerControl : MonoBehaviour
                             sword.rigid.velocity = Vector3.up * bounceStr + (dragStartPos.x > dragCurrentPos.x ? Vector3.right : Vector3.left) * bounceStr * 0.02f;
                             landBounce = true;
                             landBounceTimer = 0;
-                            Fx(swordBounceFx, sword.transform.position, Quaternion.identity);
+                            blade.OnBounce(sword.transform.position);
                         }
                     }
                     break;
                 case State.pound:
                     if (landed) {
+                        if (pounding) blade.OnPound(heldSword.transform.position);
                         nextState = State.pick;
                     }
                     break;
@@ -232,10 +244,11 @@ public class PlayerControl : MonoBehaviour
         sword.gameObject.SetActive(true);
         sword.transform.position = transform.position + (Vector3)throwOffset;
         sword.rigid.MoveRotation(throwRotation);
-        sword.rigid.velocity = ThrowVector();
+        Vector3 v = ThrowVector();
+        sword.rigid.velocity = v;
         sword.rigid.angularVelocity = throwTorque;
         sword.Init();
-        Fx(throwFx, transform.position + (Vector3)throwOffset, throwRotation);
+        blade.OnThrow(transform.position + (Vector3)throwOffset, v);
 
         heldSword.SetActive(false);
         GameControl.main.camc.UpdateTarget();
@@ -254,6 +267,7 @@ public class PlayerControl : MonoBehaviour
         Fx(catchFx);
 
         heldSword.SetActive(true);
+        Flash(0.3f);
         GameControl.main.camc.UpdateTarget();
     }
 
@@ -265,7 +279,7 @@ public class PlayerControl : MonoBehaviour
             if (invincibility > 0) return;
             if(enemy != null && pounding) {
                 //actually, the enemy should be dying
-                enemy.Damage(sword.poundDamage * sword.DamageMultiplier(), 8f, gameObject);
+                enemy.Damage(sword.poundDamage * blade.damageMultiplier, 8f, gameObject);
             }
             else {
                 health = Mathf.Min(health - damage, maxHealth);
@@ -301,6 +315,22 @@ public class PlayerControl : MonoBehaviour
     public void Fx(GameObject fx, Vector3 position, Quaternion rotation) {
         if (fx == null) return;
         Instantiate(fx, position, rotation);
+    }
+
+    public void SetSwordColor(Gradient color) {
+        swordTrail.trail.colorGradient = color;
+    }
+
+    public Gradient GetSwordColor() {
+        return swordTrail.trail.colorGradient;
+    }
+
+    public void Flash(Gradient color, float duration) {
+        flash.Set(color, duration);
+    }
+
+    public void Flash(float duration) {
+        Flash(GetSwordColor(), duration);
     }
 
     [System.Serializable]

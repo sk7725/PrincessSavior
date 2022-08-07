@@ -6,7 +6,7 @@ public class TrailFollower : MonoBehaviour
 {
     [SerializeField] protected GameObject target;
     [SerializeField] protected GameObject secondaryTarget;
-    [SerializeField] protected TrailRenderer trail;
+    public TrailRenderer trail;
 
     private bool shown = false;
     private float f = 1;
