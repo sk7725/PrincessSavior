@@ -2,14 +2,18 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FireLiquidMaterial
   m_Shader: {fileID: 4800000, guid: 080e84fddf179344fa06608ffb9d8dcf, type: 3}
-  m_ShaderKeywords: _ALPHABLEND_ON _SEGMENTED_ON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ALPHABLEND_ON
+  - _SEGMENTED_ON
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -63,6 +67,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
     - _Alpha: 1
@@ -103,7 +108,7 @@ Material:
     - _Offset: 0.426
     - _OffsetX: 0
     - _OffsetY: 0
-    - _OtlWidth: 0
+    - _OtlWidth: 0.07
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 0
@@ -130,7 +135,7 @@ Material:
     - _Yonly: 0
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.68375194, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 0.7607843, b: 0, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 0.4627451, b: 0, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
@@ -142,5 +147,5 @@ Material:
     - _ShnColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
-    - _TopColor: {r: 1, g: 0.059296675, b: 0, a: 1}
+    - _TopColor: {r: 1, g: 0.058823533, b: 0, a: 1}
   m_BuildTextureStacks: []

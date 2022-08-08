@@ -36,6 +36,10 @@ public class Blade : SwordPart
 
     public override void Equip() {
         //todo set material & mesh of both sword and heldsword's SwordModel class
+        foreach(SwordModel model in GameControl.main.player.swordModels) {
+            model.blade.filter.mesh = mesh;
+            model.blade.renderer.sharedMaterials = materials;
+        }
         GameControl.main.player.SetSwordColor(color);
     }
 

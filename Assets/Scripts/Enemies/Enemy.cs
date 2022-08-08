@@ -76,7 +76,6 @@ public class Enemy : MonoBehaviour
         if (threat != null) {
             //rigid.AddExplosionForce(knockback, threat.transform.position - Vector3.up, 20f, 0.4f, ForceMode.VelocityChange);
             bool right = transform.position.x > threat.transform.position.x;
-            Debug.Log("hit knockback enemy");
             rigid.velocity = (Vector3.up + Vector3.right * (right ? 1f : -1f)) * knockback;
         }
     }

@@ -19,10 +19,8 @@ public class TrailFollower : MonoBehaviour
 
     void LateUpdate()
     {
-        if (f > 0.01f) {
-            transform.position = GetTarget().transform.position;
-            transform.rotation = GetTarget().transform.rotation;
-        }
+        transform.position = GetTarget().transform.position;
+        transform.rotation = GetTarget().transform.rotation;
         if(target.activeInHierarchy) trail.enabled = true;
         if (target.activeInHierarchy && !shown) {
             //reset trail

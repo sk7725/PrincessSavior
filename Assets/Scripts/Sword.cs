@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    private const float MOVE_THRESH2 = 0.05f;
+    private const float MOVE_THRESH2 = 0.01f;
 
     [Header("Settings")]
     public float throwDamage = 8f, strikeDamage = 15f, poundDamage = 25f;

@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerRenderer animator;
     [SerializeField] private SwordTrail swordTrail;
     [SerializeField] private FlashProjector flash;
+    public SwordModel[] swordModels;
 
     [Header("Fx")]
     public GameObject catchFx;
@@ -287,7 +288,8 @@ public class PlayerControl : MonoBehaviour
                 if (health <= 0f) Kill();
                 else if (enemy != null){
                     //process knockback
-                    rigid.AddExplosionForce(enemy.knockback / 2f, enemy.transform.position, 10f, 0.2f, ForceMode.VelocityChange);
+                    bool right = transform.position.x > enemy.transform.position.x;
+                    rigid.velocity = (Vector3.up + Vector3.right * (right ? 1f : -1f)) * enemy.knockback;
                 }
             }
         }
