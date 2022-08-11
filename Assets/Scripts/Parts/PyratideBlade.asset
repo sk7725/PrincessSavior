@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a944f5ab255967046b87a54a1af80311, type: 3}
   m_Name: PyratideBlade
   m_EditorClassIdentifier: 
-  localized: "\uD30C\uC774\uB77C\uD0C0\uC774\uB4DC \uAC80\uB0A0"
+  localized: "\uD30C\uC774\uB77C\uD0C0\uC774\uB4DC \uCE7C\uB0A0"
+  description: "\uAC80\uC744 \uC7A1\uC744 \uB54C 3\uAC1C\uC758 \uBD88\uB369\uC774\uB97C
+    \uB358\uC9D1\uB2C8\uB2E4."
   cost: 20
-  mesh: {fileID: 4300000, guid: 97dcf48accd595b4fa53841715b766ca, type: 2}
+  mesh: {fileID: 324557015526766611, guid: 7cfd4ded4c89c5244830461c848676c1, type: 3}
   materials:
   - {fileID: 2100000, guid: aedfe8b1a117d65458725b1c1bc75b06, type: 2}
   - {fileID: 2100000, guid: dd54da8d234281d4484e946f5eb2d9d8, type: 2}

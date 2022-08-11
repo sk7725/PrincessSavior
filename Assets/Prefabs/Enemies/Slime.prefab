@@ -73,8 +73,8 @@ Transform:
   m_GameObject: {fileID: 6097999410905758427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.938868, y: 0.48735547, z: -0.13393116}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6097999409535818477}
   - {fileID: 3258699628129204696}
@@ -126,7 +126,7 @@ MonoBehaviour:
   maxHealth: 20
   contactDamage: 10
   knockback: 8
-  deathFx: {fileID: 0}
+  deathFx: {fileID: 2315629835069471037, guid: 2e509ddfd68151947b0aa2f9a5f847bc, type: 3}
 --- !u!1001 &3076947515852709427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,6 +198,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: slime_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6537404194445269929, guid: d8e76ba15262ec845a620099c2a14438, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e032e897a62abc43ba075d4248a72a4, type: 2}
+    - target: {fileID: 6537404194445269929, guid: d8e76ba15262ec845a620099c2a14438, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b298b6f66fe61a48b42744e5b977354, type: 2}
+    - target: {fileID: 6537404194445269929, guid: d8e76ba15262ec845a620099c2a14438, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b6ee34fdff2d3245b6f1e6363b59069, type: 2}
+    - target: {fileID: 6537404194445269929, guid: d8e76ba15262ec845a620099c2a14438, type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 351fdf2d523ffa14a9c4e0f47fcae639, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8e76ba15262ec845a620099c2a14438, type: 3}
 --- !u!4 &3258699628129204696 stripped

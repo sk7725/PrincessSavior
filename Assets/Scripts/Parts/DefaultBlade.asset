@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a944f5ab255967046b87a54a1af80311, type: 3}
   m_Name: DefaultBlade
   m_EditorClassIdentifier: 
-  localized: "\uC758\uC9C0\uC758 \uAC80\uB0A0"
-  cost: 0
-  mesh: {fileID: 4300000, guid: 97dcf48accd595b4fa53841715b766ca, type: 2}
+  localized: "\uC758\uC9C0\uC758 \uCE7C\uB0A0"
+  description: "\uC138\uC0C1\uC5D4 \uC758\uC9C0\uB9CC\uC73C\uB85C \uBD80\uC871\uD55C
+    \uC77C\uB3C4 \uC788\uC2B5\uB2C8\uB2E4."
+  cost: 10
+  mesh: {fileID: -8826433844599229021, guid: df93cd206b24b004d8ed66bd9570a2f0, type: 3}
   materials:
   - {fileID: 2100000, guid: e65fedec7474e3e45802c692a3d8bda7, type: 2}
   damageMultiplier: 1

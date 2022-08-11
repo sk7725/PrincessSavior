@@ -12,10 +12,20 @@ public class GameControl : MonoBehaviour
 
     [HideInInspector] public bool scrollCamera = false;
 
+    public Transform playerSpawn;
+    public GameObject[] dialogs = { };
+
     private void Awake() {
         main = this; //behold, the laziest singleton(tm) 2; electric boogaloo
         player = GameObject.FindObjectOfType<PlayerControl>();
         cam = Camera.main;
         camc = cam.GetComponent<CameraControl>();
+    }
+
+    public bool DialogOpen() {
+        foreach(GameObject dialog in dialogs) {
+            if(dialog.activeInHierarchy) return true;
+        }
+        return false;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public const float MIN_DRAG_LEN2 = 0.15f, HEIGHT = 2f;
-    private const float INVIN_TIME = 0.5f;
+    private const float INVIN_TIME = 0.5f, DEATH_BARRIER = -40f;
 
     [Header("Settings")]
     public float poundStr = 5f;
@@ -15,10 +15,12 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Vector2 throwOffset;
     [SerializeField] private Quaternion throwRotation = Quaternion.identity;
     public float maxHealth = 100f;
-
+    public float defaultGravity = -18f;
 
     [Header("Sword Parts")]
     public Blade blade;
+    public Handle handle;
+    public Accessory accessory;
 
     //preset fields
     [Header("Preset Fields")]
@@ -64,6 +66,7 @@ public class PlayerControl : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         health = maxHealth;
+        Physics.gravity = Vector2.up * defaultGravity;
     }
 
     void Start()
@@ -74,7 +77,9 @@ public class PlayerControl : MonoBehaviour
 
         //equip parts
         blade.Equip();
-        //todo handle & accessory equip
+        handle.Equip();
+        accessory.Equip();
+
         sword.gameObject.SetActive(false);
         landed = pounding = false;
     }
@@ -83,6 +88,7 @@ public class PlayerControl : MonoBehaviour
     {
         stateTime += Time.deltaTime;
         CheckLanded();
+        CheckDeath();
         UpdateInput();
         bool updateTransform = true; //update animator transform
         if(invincibility > 0) invincibility -= Time.deltaTime;
@@ -153,7 +159,7 @@ public class PlayerControl : MonoBehaviour
                         rigid.velocity = Vector3.zero;
                         pounding = true;
                     }
-                    rigid.AddForce(Vector3.down * poundStr, ForceMode.VelocityChange);
+                    rigid.AddForce(Vector3.down * poundStr * (Physics.gravity.y / defaultGravity), ForceMode.VelocityChange);
                 }
                 else {
                     //lerp animator z
@@ -166,7 +172,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void UpdateInput() {
-        bool pressed = Input.GetMouseButton(0);
+        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen();
 
         switch (state) {
             case State.idle:
@@ -194,7 +200,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 break;
             case State.thrown:
-                if (pressed) {
+                if (pressed && !accessory.disablePound) {
                     //ground pound!
                     nextState = State.pound;
                 }
@@ -233,6 +239,15 @@ public class PlayerControl : MonoBehaviour
                     animator.transform.position = new Vector3(transform.position.x, transform.position.y, z);
                 }
                 break;
+            default: 
+                if (targetRotation != null) {
+                    animator.transform.rotation = Quaternion.Lerp(animator.transform.rotation, targetRotation.Value, 8f * Time.deltaTime);
+                    if (animator.transform.rotation.Similar(targetRotation.Value, 0.001f)) {
+                        animator.transform.rotation = targetRotation.Value;
+                        targetRotation = null;
+                    }
+                }
+                break;
         }
     }
 
@@ -240,16 +255,22 @@ public class PlayerControl : MonoBehaviour
         landed = Physics.CheckSphere(new Vector3(col.bounds.center.x, col.bounds.center.y - ((HEIGHT - 1f) / 2 + 0.15f), col.bounds.center.z), 0.45f, 1 << 6, QueryTriggerInteraction.Ignore);
     }
 
+    private void CheckDeath() {
+        Vector3 pos = sword.gameObject.activeInHierarchy ? sword.transform.position : transform.position;
+        if (pos.y < DEATH_BARRIER) Kill();
+    }
+
     private void ThrowSword() {
         landBounce = false;
         sword.gameObject.SetActive(true);
         sword.transform.position = transform.position + (Vector3)throwOffset;
         sword.rigid.MoveRotation(throwRotation);
-        Vector3 v = ThrowVector();
+        Vector3 v = ThrowVector() * handle.throwMultiplier * Mathf.Sqrt(Physics.gravity.y / defaultGravity);
         sword.rigid.velocity = v;
         sword.rigid.angularVelocity = throwTorque;
         sword.Init();
         blade.OnThrow(transform.position + (Vector3)throwOffset, v);
+        handle.OnThrow(transform.position + (Vector3)throwOffset, v);
 
         heldSword.SetActive(false);
         GameControl.main.camc.UpdateTarget();
@@ -280,10 +301,10 @@ public class PlayerControl : MonoBehaviour
             if (invincibility > 0) return;
             if(enemy != null && pounding) {
                 //actually, the enemy should be dying
-                enemy.Damage(sword.poundDamage * blade.damageMultiplier, 8f, gameObject);
+                enemy.Damage(sword.GetPoundDamage() * blade.damageMultiplier, 8f, gameObject);
             }
             else {
-                health = Mathf.Min(health - damage, maxHealth);
+                health = Mathf.Min(health - damage * accessory.takeDamageMultiplier, maxHealth);
                 invincibility = INVIN_TIME;
                 if (health <= 0f) Kill();
                 else if (enemy != null){
@@ -297,6 +318,15 @@ public class PlayerControl : MonoBehaviour
 
     public void Kill() {
         //todo death
+        transform.position = GameControl.main.playerSpawn.position;
+        rigid.velocity = Vector3.zero;
+        invincibility = INVIN_TIME;
+
+        state = State.none;
+        nextState = State.idle;
+        heldSword.SetActive(true);
+        sword.gameObject.SetActive(false);
+        landed = pounding = false;
     }
 
     private Vector2 FingerPos() {

@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a944f5ab255967046b87a54a1af80311, type: 3}
+  m_Name: KineticBlade
+  m_EditorClassIdentifier: 
+  localized: "\uD0A4\uB124\uD2F1 \uCE7C\uB0A0"
+  description: "\uAC80\uC744 \uB0B4\uB824\uCC0D\uC740 \uC704\uCE58\uC5D0 \uCDA9\uACA9\uD30C\uAC00
+    \uC0DD\uACA8 \uC801\uC744 \uBC00\uC5B4\uB0C5\uB2C8\uB2E4."
+  cost: 40
+  mesh: {fileID: -5443633280120258924, guid: 179f1c00d431d8042b80782680a75ca2, type: 3}
+  materials:
+  - {fileID: -586648137795990427, guid: 179f1c00d431d8042b80782680a75ca2, type: 3}
+  damageMultiplier: 1.35
+  color:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 0.7239251, g: 0, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 43754
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  strikeFx: {fileID: 0}
+  throwFx: {fileID: 0}
+  poundFx: {fileID: 0}
+  thrownHitFx: {fileID: 2315629835069471037, guid: 20049386b2602734890ecd0b45dbe825, type: 3}
+  bounceFx: {fileID: 9001223473084519564, guid: 896c8d0307736b4429ca384e91203127, type: 3}

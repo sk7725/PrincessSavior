@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449db6a663cd53a429ab864a2ffe2589, type: 3}
+  m_Name: FallenSpinel
+  m_EditorClassIdentifier: 
+  localized: "\uB098\uB77D\uC758 \uC2A4\uD53C\uB12C"
+  description: "\uC911\uB825\uC774 \uB450 \uBC30 \uB298\uC5B4\uB0A9\uB2C8\uB2E4.
+    \uB0B4\uB824\uCC0D\uAE30 \uD53C\uD574\uAC00 \uB450 \uBC30 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  cost: 30
+  mesh: {fileID: -626369228641581676, guid: 9142e8dc65937e9428ca7d746db52b36, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 502f99c6022067848ab8661c407844ef, type: 2}
+  color: {r: 1, g: 0.2971698, b: 0.60988075, a: 1}
+  penetrate: 0
+  disablePound: 0
+  scoreMultiplier: 1
+  takeDamageMultiplier: 1
+  gravity: -36

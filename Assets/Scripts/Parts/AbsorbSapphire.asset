@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfa87562f1e6c94aab4460e287d006c, type: 3}
+  m_Name: AbsorbSapphire
+  m_EditorClassIdentifier: 
+  localized: "\uBCF4\uD638\uC758 \uC0AC\uD30C\uC774\uC5B4"
+  description: "\uBC1B\uB294 \uD53C\uD574\uAC00 25% \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  cost: 25
+  mesh: {fileID: 2073964960337698929, guid: 7072c4455d72c9a43b464b2b46642fbd, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 64db5ca1dc921e946b60a0a2dab2b2a6, type: 2}
+  color: {r: 0, g: 0.43023157, b: 1, a: 1}
+  penetrate: 0
+  disablePound: 0
+  scoreMultiplier: 1
+  takeDamageMultiplier: 0.75

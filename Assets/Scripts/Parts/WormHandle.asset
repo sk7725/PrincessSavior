@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326f61c6a0c8b5f4cb07128fd56877f7, type: 3}
+  m_Name: WormHandle
+  m_EditorClassIdentifier: 
+  localized: "\uC9C0\uB801\uC774 \uCE7C\uC790\uB8E8"
+  description: "\uAC80\uC774 \uB358\uC9C8 \uB54C \uC9E7\uC740 \uAC70\uB9AC\uB97C
+    \uC21C\uAC04\uC774\uB3D9\uD569\uB2C8\uB2E4."
+  cost: 25
+  mesh: {fileID: 3736353350704208934, guid: c7fbca7b39a280b478fe63c7eeb47134, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 3b39b375cfacee248aeb6be0ce859bf0, type: 2}
+  - {fileID: 2100000, guid: 305a50666ad18a04ca61a353131f4888, type: 2}
+  throwMultiplier: 0.75
+  distance: 5
+  poofFx: {fileID: 2315629835069471037, guid: 5ae1f10a1246ecc43b194e915420ed55, type: 3}
+  poofOutFx: {fileID: 2315629835069471037, guid: 5ae1f10a1246ecc43b194e915420ed55, type: 3}

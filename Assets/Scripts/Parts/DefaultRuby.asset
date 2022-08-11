@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfa87562f1e6c94aab4460e287d006c, type: 3}
+  m_Name: DefaultRuby
+  m_EditorClassIdentifier: 
+  localized: "\uC758\uC9C0\uC758 \uB8E8\uBE44"
+  description: "\uC5B4\uB290 \uB545\uC18D \uC804\uC124\uC5D0 \uB530\uB974\uBA74,
+    \uBD89\uC740\uC0C9\uC740 \uC758\uC9C0\uC758 \uC0C1\uC9D5\uC785\uB2C8\uB2E4."
+  cost: 15
+  mesh: {fileID: -5702263308566048103, guid: 2fa7442b6f85dd546a4098741c6f6bdb, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 95a12f90321ad364b9aac0ee4b2bd3c0, type: 2}
+  color: {r: 1, g: 0.3160377, b: 0.3160377, a: 1}
+  penetrate: 0
+  disablePound: 0
+  scoreMultiplier: 1
+  takeDamageMultiplier: 1

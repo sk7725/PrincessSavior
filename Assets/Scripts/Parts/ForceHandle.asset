@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d64f8d45d0967a4796bad46720ba089, type: 3}
+  m_Name: ForceHandle
+  m_EditorClassIdentifier: 
+  localized: "\uD798\uC758 \uCE7C\uC790\uB8E8"
+  description: "\uB354 \uAC15\uD558\uACE0 \uBB35\uC9C1\uD558\uAC8C \uAC80\uC744 \uB358\uC9D1\uB2C8\uB2E4."
+  cost: 20
+  mesh: {fileID: 6050866442374650247, guid: 2ca784dfa9550b041858ad3d3c7fc023, type: 3}
+  materials:
+  - {fileID: 2633759564674578853, guid: 2ca784dfa9550b041858ad3d3c7fc023, type: 3}
+  throwMultiplier: 1.5

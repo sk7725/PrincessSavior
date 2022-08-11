@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slime1Material
-  m_Shader: {fileID: 4800000, guid: 18c1d9971790f0548b7f4ec720dcbf31, type: 3}
+  m_Shader: {fileID: 4800000, guid: e7695e75d5be27e409e755070ceea9fb, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _SEGMENTED_ON
@@ -76,8 +76,8 @@ Material:
     - _MinLight: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0
-    - _OtlWidth: 5
+    - _Offset: 1.1
+    - _OtlWidth: 17.1
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 0
@@ -92,8 +92,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DarkColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.8901961, b: 0.99607843, a: 0.56078434}
+    - _DarkColor: {r: 0.6415094, g: 0.12406549, b: 0.62147933, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OtlColor: {r: 1, g: 0.8901961, b: 0.99607843, a: 0.56078434}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}

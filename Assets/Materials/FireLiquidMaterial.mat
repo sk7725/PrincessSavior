@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FireLiquidMaterial
-  m_Shader: {fileID: 4800000, guid: 080e84fddf179344fa06608ffb9d8dcf, type: 3}
+  m_Shader: {fileID: 4800000, guid: ea97e92f2119a874b9fe91b698a452fb, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ALPHABLEND_ON
@@ -108,7 +108,7 @@ Material:
     - _Offset: 0.426
     - _OffsetX: 0
     - _OffsetY: 0
-    - _OtlWidth: 0.07
+    - _OtlWidth: 0.37
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 0

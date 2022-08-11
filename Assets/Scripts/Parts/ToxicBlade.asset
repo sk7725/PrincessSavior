@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a944f5ab255967046b87a54a1af80311, type: 3}
+  m_Name: ToxicBlade
+  m_EditorClassIdentifier: 
+  localized: "\uB9F9\uB3C5\uC758 \uCE7C\uB0A0"
+  description: "\uAC80\uC744 \uB0B4\uB824\uCC0D\uC740 \uC704\uCE58\uC5D0 \uB3C5\uAC00\uC2A4
+    \uAD6C\uB984\uC774 \uC0DD\uC131\uB429\uB2C8\uB2E4."
+  cost: 20
+  mesh: {fileID: 5621715024845369525, guid: a08ec2795f004dc42a7e742465cfdff7, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 34a1d57dbf9faf7469dd4725c717469c, type: 2}
+  damageMultiplier: 0.8
+  color:
+    serializedVersion: 2
+    key0: {r: 0, g: 1, b: 0.33240128, a: 1}
+    key1: {r: 0.7592945, g: 0, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 50693
+    ctime2: 65535
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  strikeFx: {fileID: 0}
+  throwFx: {fileID: 0}
+  poundFx: {fileID: 0}
+  thrownHitFx: {fileID: 2315629835069471037, guid: 20049386b2602734890ecd0b45dbe825, type: 3}
+  bounceFx: {fileID: 9001223473084519564, guid: 896c8d0307736b4429ca384e91203127, type: 3}

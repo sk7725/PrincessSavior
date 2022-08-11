@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449db6a663cd53a429ab864a2ffe2589, type: 3}
+  m_Name: ZenithDiamond
+  m_EditorClassIdentifier: 
+  localized: "\uCC9C\uACF5\uC758 \uB2E4\uC774\uC544\uBAAC\uB4DC"
+  description: "\uC911\uB825\uC774 \uBC18\uC73C\uB85C \uC904\uC5B4\uB4ED\uB2C8\uB2E4.
+    \uB0B4\uB824\uCC0D\uAE30 \uD53C\uD574\uAC00 \uBC18\uC73C\uB85C \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  cost: 35
+  mesh: {fileID: -626369228641581676, guid: 9142e8dc65937e9428ca7d746db52b36, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 8d76b11c093069c4eb885be1f66088a3, type: 2}
+  color: {r: 0.6084906, g: 0.9398965, b: 1, a: 1}
+  penetrate: 0
+  disablePound: 0
+  scoreMultiplier: 1
+  takeDamageMultiplier: 1
+  gravity: -9

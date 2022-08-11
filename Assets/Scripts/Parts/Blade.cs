@@ -46,4 +46,8 @@ public class Blade : SwordPart
     public override void Unequip() {
 
     }
+
+    public override string Description() {
+        return string.Format("{0}\n<color=#007812>[°ø°Ý·Â {1}%]</color>", base.Description(), Mathf.RoundToInt(damageMultiplier * 100));
+    }
 }

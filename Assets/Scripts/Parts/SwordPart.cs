@@ -6,6 +6,7 @@ public abstract class SwordPart : ScriptableObject
 {
     [Header("General")]
     public string localized;
+    public string description;
     public int cost = 10;
 
     public Mesh mesh;
@@ -14,4 +15,8 @@ public abstract class SwordPart : ScriptableObject
     public abstract void Equip();
 
     public abstract void Unequip();
+
+    public virtual string Description() {
+        return description;
+    }
 }

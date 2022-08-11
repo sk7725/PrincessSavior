@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d260a15e8c6b1478f4f2c8c7c3644b, type: 3}
+  m_Name: ZeroGHandle
+  m_EditorClassIdentifier: 
+  localized: "\uBB34\uC911\uB825 \uCE7C\uC790\uB8E8"
+  description: "\uC77C\uC2DC\uC801\uC73C\uB85C \uAC80\uC774 \uC911\uB825\uC758 \uC601\uD5A5\uC744
+    \uBC1B\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
+  cost: 30
+  mesh: {fileID: -2542209672197633914, guid: e7621004c42405547a016d1ff63888f9, type: 3}
+  materials:
+  - {fileID: 6452961421775412331, guid: e7621004c42405547a016d1ff63888f9, type: 3}
+  - {fileID: 2100000, guid: cb362a977e297c340a225560cb01b0e8, type: 2}
+  throwMultiplier: 0.7
+  duration: 2
