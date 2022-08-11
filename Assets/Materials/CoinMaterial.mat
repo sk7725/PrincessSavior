@@ -2,14 +2,17 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CoinMaterial
   m_Shader: {fileID: 4800000, guid: ba4ac45649f9a974fa77e5fce712a640, type: 3}
-  m_ShaderKeywords: _EMISSION _SEGMENTED_ON
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+  - _SEGMENTED_ON
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -59,6 +62,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AmbientCol: 0
     - _BumpScale: 1
@@ -78,7 +82,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offset: 0
-    - _OtlWidth: 1
+    - _OtlWidth: 0
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 1
@@ -88,7 +92,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3
+    - _Steps: 3.8
     - _StpSmooth: 0
     - _UVSec: 0
     - _ZWrite: 1

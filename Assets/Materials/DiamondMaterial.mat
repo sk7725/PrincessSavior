@@ -7,11 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlashMaterial
-  m_Shader: {fileID: 4800000, guid: 36ac21c3d061ca14b96162adcca2c096, type: 3}
+  m_Name: DiamondMaterial
+  m_Shader: {fileID: 4800000, guid: ba4ac45649f9a974fa77e5fce712a640, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_InvalidKeywords:
+  - _EMISSION
+  - _SEGMENTED_ON
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -20,10 +22,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -60,33 +58,49 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - PixelSnap: 0
-    - _Alpha: 1
+    - _AmbientCol: 0
     - _BumpScale: 1
+    - _Clipped: 0
+    - _ColBright: 0
+    - _ColIntense: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EnableExternalAlpha: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Lumin: 0.532
+    - _MaxLight: 1
+    - _Metallic: 1
+    - _MinLight: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset: 0
     - _OtlWidth: 0
     - _Parallax: 0.02
+    - _Segmented: 1
+    - _ShnIntense: 1
+    - _ShnOverlap: 0
+    - _ShnRange: 0.06
+    - _ShnSmooth: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Steps: 2.79
+    - _StpSmooth: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.026249781, g: 0, b: 0.107700825, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 0, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.5019608, g: 1, b: 0.5433979, a: 1}
+    - _DarkColor: {r: 0, g: 0.6901961, b: 0.11364833, a: 1}
+    - _EmissionColor: {r: 0.18867922, g: 0.15020345, b: 0, a: 1}
+    - _OtlColor: {r: 0.6603774, g: 0.5145161, b: 0, a: 1}
+    - _ShnColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

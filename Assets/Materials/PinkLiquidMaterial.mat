@@ -2,18 +2,23 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PinkLiquidMaterial
-  m_Shader: {fileID: 4800000, guid: 481153b840b6e408da95e6afbe176397, type: 3}
-  m_ShaderKeywords: _ALPHABLEND_ON _CLIPPED_ON _SEGMENTED_ON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_Shader: {fileID: 4800000, guid: 7cd5de0b884b14f88ab763ef465e1799, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ALPHABLEND_ON
+  - _CLIPPED_ON
+  - _SEGMENTED_ON
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -63,8 +68,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - PixelSnap: 0
+    - _Alpha: 1
     - _AmbientCol: 0.044
     - _BlendOp: 0
     - _BumpScale: 1
@@ -102,6 +109,7 @@ Material:
     - _Offset: 0.426
     - _OffsetX: 0
     - _OffsetY: 0
+    - _OtlWidth: 0
     - _Parallax: 0.02
     - _Segmented: 1
     - _ShnIntense: 0
@@ -128,9 +136,11 @@ Material:
     - _Yonly: 0
     - _ZWrite: 0
     m_Colors:
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.57254905, b: 0.92941177, a: 0.7294118}
+    - _Color: {r: 1, g: 0.57254905, b: 0.92941177, a: 0.5803922}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
+    - _DarkColor: {r: 0.754717, g: 0, b: 0.6729378, a: 1}
     - _EmissionColor: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _GridColor: {r: 1, g: 1, b: 1, a: 1}
@@ -139,4 +149,5 @@ Material:
     - _ShnColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
+    - _TopColor: {r: 1, g: 0.18396229, b: 0.7983906, a: 1}
   m_BuildTextureStacks: []

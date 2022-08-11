@@ -47,6 +47,7 @@ public class PlayerControl : MonoBehaviour
     private Quaternion? targetRotation;
 
     [System.NonSerialized] public float health;
+    [System.NonSerialized] public int coins = 0;
     private float invincibility;
 
     //inputs
@@ -82,6 +83,7 @@ public class PlayerControl : MonoBehaviour
 
         sword.gameObject.SetActive(false);
         landed = pounding = false;
+        coins = 0;
     }
 
     void Update()
@@ -256,8 +258,13 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void CheckDeath() {
-        Vector3 pos = sword.gameObject.activeInHierarchy ? sword.transform.position : transform.position;
+        Vector3 pos = PlayerPos();
         if (pos.y < DEATH_BARRIER) Kill();
+    }
+
+    /// <returns>Player or the sword's position, depending on the current player state.</returns>
+    public Vector3 PlayerPos() {
+        return sword.gameObject.activeInHierarchy ? sword.transform.position : transform.position;
     }
 
     private void ThrowSword() {
@@ -327,6 +334,9 @@ public class PlayerControl : MonoBehaviour
         heldSword.SetActive(true);
         sword.gameObject.SetActive(false);
         landed = pounding = false;
+        health = maxHealth;
+        coins -= 10;
+        if (coins < 0) coins = 0;
     }
 
     private Vector2 FingerPos() {
