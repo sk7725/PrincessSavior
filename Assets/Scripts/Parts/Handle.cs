@@ -11,16 +11,22 @@ public class Handle : SwordPart {
         
     }
 
-    public override void Equip() {
+    public override void OnEquip() {
         //todo set material & mesh of both sword and heldsword's SwflordModel class
         foreach (SwordModel model in GameControl.main.player.swordModels) {
-            model.handle.filter.mesh = mesh;
+            model.handle.filter.sharedMesh = mesh;
             model.handle.renderer.sharedMaterials = materials;
         }
     }
 
-    public override void Unequip() {
+    public override void OnUnequip() {
 
+    }
+
+    public override void EquipPlayer() {
+        GameControl.main.player.handle.OnUnequip();
+        GameControl.main.player.handle = this;
+        GameControl.main.player.handle.OnEquip();
     }
 
     public override string Description() {

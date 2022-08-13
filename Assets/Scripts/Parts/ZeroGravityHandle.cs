@@ -22,8 +22,8 @@ public class ZeroGravityHandle : Handle
         if(cid == throwid) GameControl.main.player.sword.rigid.useGravity = true;
     }
 
-    public override void Unequip() {
-        base.Unequip();
+    public override void OnUnequip() {
+        base.OnUnequip();
         throwid = 0;
         GameControl.main.player.sword.rigid.useGravity = true;
     }

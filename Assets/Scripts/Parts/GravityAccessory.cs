@@ -7,13 +7,13 @@ public class GravityAccessory : Accessory
 {
     public float gravity = -18f;
 
-    public override void Equip() {
-        base.Equip();
+    public override void OnEquip() {
+        base.OnEquip();
         Physics.gravity = Vector3.up * gravity;
     }
 
-    public override void Unequip() {
-        base.Unequip();
+    public override void OnUnequip() {
+        base.OnUnequip();
         Physics.gravity = Vector3.up * GameControl.main.player.defaultGravity;
     }
 }

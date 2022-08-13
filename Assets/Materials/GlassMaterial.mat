@@ -87,13 +87,13 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3
+    - _Steps: 6.5
     - _StpSmooth: 0
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.7783019, g: 0.9606664, b: 1, a: 0.56078434}
-    - _DarkColor: {r: 0, g: 0.5194397, b: 0.745283, a: 0.56078434}
+    - _DarkColor: {r: 0, g: 0.41946384, b: 0.6037736, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OtlColor: {r: 1, g: 0.8901961, b: 0.99607843, a: 0.56078434}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}

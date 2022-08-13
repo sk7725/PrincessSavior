@@ -17,5 +17,5 @@ MonoBehaviour:
   cost: 20
   mesh: {fileID: 6050866442374650247, guid: 2ca784dfa9550b041858ad3d3c7fc023, type: 3}
   materials:
-  - {fileID: 2633759564674578853, guid: 2ca784dfa9550b041858ad3d3c7fc023, type: 3}
+  - {fileID: 2100000, guid: c4a5258a3c0aeec45bd2c08ead75f056, type: 2}
   throwMultiplier: 1.5

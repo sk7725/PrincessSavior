@@ -12,9 +12,11 @@ public abstract class SwordPart : ScriptableObject
     public Mesh mesh;
     public Material[] materials;
 
-    public abstract void Equip();
+    public abstract void OnEquip();
 
-    public abstract void Unequip();
+    public abstract void OnUnequip();
+
+    public abstract void EquipPlayer();
 
     public virtual string Description() {
         return description;

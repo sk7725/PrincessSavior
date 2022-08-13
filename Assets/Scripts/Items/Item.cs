@@ -15,8 +15,11 @@ public class Item : MonoBehaviour
     [SerializeField] private GameObject hitFx = null;
 
     private bool magnetized;
+    private float magSpeed;
 
     private void Awake() {
+        magnetized = false;
+        magSpeed = 0;
         if (magnetRange != null) magnetRange.item = this;
     }
 
@@ -34,12 +37,20 @@ public class Item : MonoBehaviour
         }
 
         if (magnetized && DoMagnet()) {
-            transform.position = Vector3.MoveTowards(transform.position, GameControl.main.player.PlayerPos(), Time.deltaTime * magnetStrength);
+            if (GameControl.main.player.dead) {
+                //stop magging
+                magSpeed = 0;
+                magnetized = false;
+                magnetRange.Unmagnetize();
+            }
+            magSpeed += Time.deltaTime * 3f;
+            if (magSpeed > magnetStrength) magSpeed = magnetStrength;
+            transform.position = Vector3.MoveTowards(transform.position, GameControl.main.player.PlayerPos(), Time.deltaTime * magSpeed);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (CanCollect() && (other.CompareTag("Player") || other.CompareTag("Sword"))) {
+        if (!GameControl.main.player.dead && CanCollect() && (other.CompareTag("Player") || other.CompareTag("Sword"))) {
             OnCollect();
             Destroy(gameObject);
         }

@@ -34,17 +34,23 @@ public class Blade : SwordPart
         GameControl.main.player.Fx(bounceFx, position, Quaternion.identity);
     }
 
-    public override void Equip() {
+    public override void OnEquip() {
         //todo set material & mesh of both sword and heldsword's SwordModel class
         foreach(SwordModel model in GameControl.main.player.swordModels) {
-            model.blade.filter.mesh = mesh;
+            model.blade.filter.sharedMesh = mesh;
             model.blade.renderer.sharedMaterials = materials;
         }
         GameControl.main.player.SetSwordColor(color);
     }
 
-    public override void Unequip() {
+    public override void OnUnequip() {
 
+    }
+
+    public override void EquipPlayer() {
+        GameControl.main.player.blade.OnUnequip();
+        GameControl.main.player.blade = this;
+        GameControl.main.player.blade.OnEquip();
     }
 
     public override string Description() {

@@ -12,9 +12,9 @@ public class HandleEditor : Editor {
         bool e = GUILayout.Button("Equip");
         if (e) {
             Handle handle = (Handle)serializedObject.targetObject;
-            GameControl.main.player.handle.Unequip();
+            GameControl.main.player.handle.OnUnequip();
             GameControl.main.player.handle = handle;
-            GameControl.main.player.handle.Equip();
+            GameControl.main.player.handle.OnEquip();
         }
         EditorGUI.EndDisabledGroup();
     }

@@ -12,15 +12,21 @@ public class Accessory : SwordPart {
     public int scoreMultiplier = 1;
     public float takeDamageMultiplier = 1f;
 
-    public override void Equip() {
+    public override void OnEquip() {
         //todo set material & mesh of both sword and heldsword's SwflordModel class
         foreach (SwordModel model in GameControl.main.player.swordModels) {
-            model.accessory.filter.mesh = mesh;
+            model.accessory.filter.sharedMesh = mesh;
             model.accessory.renderer.sharedMaterials = materials;
         }
     }
 
-    public override void Unequip() {
+    public override void OnUnequip() {
 
+    }
+
+    public override void EquipPlayer() {
+        GameControl.main.player.accessory.OnUnequip();
+        GameControl.main.player.accessory = this;
+        GameControl.main.player.accessory.OnEquip();
     }
 }

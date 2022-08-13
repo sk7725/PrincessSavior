@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class PlayerControl : MonoBehaviour
 
     [System.NonSerialized] public float health;
     [System.NonSerialized] public int coins = 0;
+    [System.NonSerialized] public bool swordPopupActive = false, dead = false;
     private float invincibility;
 
     //inputs
@@ -77,12 +79,13 @@ public class PlayerControl : MonoBehaviour
         swordOffset = sword.playerOffset;
 
         //equip parts
-        blade.Equip();
-        handle.Equip();
-        accessory.Equip();
+        blade.OnEquip();
+        handle.OnEquip();
+        accessory.OnEquip();
 
         sword.gameObject.SetActive(false);
         landed = pounding = false;
+        swordPopupActive = false;
         coins = 0;
     }
 
@@ -90,6 +93,7 @@ public class PlayerControl : MonoBehaviour
     {
         stateTime += Time.deltaTime;
         CheckLanded();
+        if (dead) return;
         CheckDeath();
         UpdateInput();
         bool updateTransform = true; //update animator transform
@@ -174,7 +178,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void UpdateInput() {
-        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen();
+        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen() && !EventSystem.current.IsPointerOverGameObject();
 
         switch (state) {
             case State.idle:
@@ -301,6 +305,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     public void Damage(float damage, Enemy enemy = null) {
+        if (dead) return;
         if(damage < 0f) {
             health = Mathf.Min(health - damage, maxHealth);
         }
@@ -324,7 +329,16 @@ public class PlayerControl : MonoBehaviour
     }
 
     public void Kill() {
-        //todo death
+        if(dead) return;
+        dead = true;
+        coins -= 10;
+        if (coins < 0) coins = 0;
+
+        //todo death effect
+        Invoke("ReturnCheckpoint", 3f);
+    }
+
+    public void ReturnCheckpoint() {
         transform.position = GameControl.main.playerSpawn.position;
         rigid.velocity = Vector3.zero;
         invincibility = INVIN_TIME;
@@ -335,8 +349,7 @@ public class PlayerControl : MonoBehaviour
         sword.gameObject.SetActive(false);
         landed = pounding = false;
         health = maxHealth;
-        coins -= 10;
-        if (coins < 0) coins = 0;
+        dead = false;
     }
 
     private Vector2 FingerPos() {

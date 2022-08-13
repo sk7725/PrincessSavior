@@ -25,8 +25,8 @@ public class VelocityHandle : Handle {
         }
     }
 
-    public override void Unequip() {
-        base.Unequip();
+    public override void OnUnequip() {
+        base.OnUnequip();
         throwid = 0;
     }
 }
