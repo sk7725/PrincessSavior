@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class PlayerRenderer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Animator animator;
+    private PlayerControl player;
+
+    public enum Trigger {
+        thrown,
+        upgrade,
+        hurt
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        player = GameControl.main.player;
+    }
+
+    private void Update()
+    {
+        animator.SetBool("landed", player.landed);
+        animator.SetBool("prethrow", player.dragged && player.state == PlayerControl.State.idle);
+        animator.SetBool("dead", player.dead);
+        animator.SetBool("pounding", player.state == PlayerControl.State.pound);
+    }
+
+    public void Trig(Trigger trigger) {
+        animator.SetTrigger(trigger.ToString());
     }
 }

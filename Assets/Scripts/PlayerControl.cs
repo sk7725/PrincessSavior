@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+using static PlayerRenderer;
+
 public class PlayerControl : MonoBehaviour
 {
     public const float MIN_DRAG_LEN2 = 0.15f, HEIGHT = 2f;
@@ -35,10 +37,11 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Fx")]
     public GameObject catchFx;
-    public GameObject catchPrevFx;
+    public GameObject catchPrevFx, swordUpgradeFx;
 
     [Header("Debugging")]
-    public State state, nextState;
+    public State state;
+    public State nextState;
     public float stateTime = 0f; //time after a state change
 
     public bool landed, pounding, landBounce;
@@ -48,7 +51,7 @@ public class PlayerControl : MonoBehaviour
     private Quaternion? targetRotation;
 
     [System.NonSerialized] public float health;
-    [System.NonSerialized] public int coins = 0;
+    public int coins = 0;
     [System.NonSerialized] public bool swordPopupActive = false, dead = false;
     private float invincibility;
 
@@ -145,6 +148,9 @@ public class PlayerControl : MonoBehaviour
             state = nextState;
             nextState = State.none;
             switch (state) {
+                case State.preThrow:
+                    animator.Trig(Trigger.thrown);
+                    break;
                 case State.thrown:
                     ThrowSword();
                     break;
@@ -324,6 +330,7 @@ public class PlayerControl : MonoBehaviour
                     bool right = transform.position.x > enemy.transform.position.x;
                     rigid.velocity = (Vector3.up + Vector3.right * (right ? 1f : -1f)) * enemy.knockback;
                 }
+                animator.Trig(Trigger.hurt);
             }
         }
     }
@@ -350,6 +357,12 @@ public class PlayerControl : MonoBehaviour
         landed = pounding = false;
         health = maxHealth;
         dead = false;
+    }
+
+    public void OnPartUpdate() {
+        //todo fx
+        animator.Trig(Trigger.upgrade);
+        Fx(swordUpgradeFx, heldSword.transform.position, heldSword.transform.rotation);
     }
 
     private Vector2 FingerPos() {

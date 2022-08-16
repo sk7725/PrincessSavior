@@ -36,7 +36,7 @@ public class SwordPartItem : Item
 
     public override void OnCollect() {
         base.OnCollect();
-        //todo
+        UI.PartPopup(blade != null ? blade : (handle != null ? handle : accessory));
         GameControl.main.player.swordPopupActive = true;
     }
 

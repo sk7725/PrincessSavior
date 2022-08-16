@@ -12,16 +12,22 @@ public class PartPopup : MonoBehaviour
     private SwordPart part = null;
     private bool clicked = false;
 
+    private void Awake() {
+        transform.SetParent(GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>().transform, false);
+    }
+
     private void Start() {
         yesb.onClick.AddListener(ClickedYes);
         nob.onClick.AddListener(ClickedNo);
     }
+
     public void Set(SwordPart part) {
         this.part = part;
         clicked = false;
         nameText.text = part.localized;
         costText.text = part.cost.ToString();
         yesb.interactable = GameControl.main.player.coins >= part.cost;
+        StartCoroutine(IOpen());
     }
 
     private void Update() {
@@ -35,7 +41,8 @@ public class PartPopup : MonoBehaviour
         GameControl.main.player.swordPopupActive = false;
         GameControl.main.player.coins -= part.cost;
         part.EquipPlayer();
-        
+        GameControl.main.player.OnPartUpdate();
+
         StartCoroutine(IClose());
     }
 
@@ -46,8 +53,21 @@ public class PartPopup : MonoBehaviour
         StartCoroutine(IClose());
     }
 
+    private IEnumerator IOpen() {
+        transform.localScale = Vector3.zero;
+        float duration = 0.3f;
+        float t = 0;
+        while (t < duration) {
+            yield return null;
+            t += Time.deltaTime;
+            transform.localScale = Vector3.one * Mathf.Clamp01(t / duration);
+        }
+
+        transform.localScale = Vector3.one;
+    }
+
     private IEnumerator IClose() {
-        float duration = 0.5f;
+        float duration = 0.2f;
         float t = 0;
         while(t < duration) {
             yield return null;
