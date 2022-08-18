@@ -10,7 +10,7 @@ public class Sword : MonoBehaviour
     public float throwDamage = 8f, strikeDamage = 15f, poundDamage = 25f;
     public float playerOffset;
 
-    [HideInInspector] public bool landed;
+    public bool landed, collided;
 
     [HideInInspector] public Rigidbody rigid;
     private float time = 0f;
@@ -27,6 +27,7 @@ public class Sword : MonoBehaviour
     public void Init() {
         time = 0f;
         landed = false;
+        collided = false;
     }
 
     public Vector3 GetPlayerPos(bool preserveZ = false) {
@@ -40,7 +41,7 @@ public class Sword : MonoBehaviour
 
     public void CheckLanded() {
         //this is quite different from the susal landed checker, just check if it is moving
-        landed = rigid.velocity.sqrMagnitude < MOVE_THRESH2 && time > 0.5f;
+        landed = rigid.velocity.sqrMagnitude < MOVE_THRESH2 && time > 0.5f && collided;
     }
 
     //called by enemy (via triggerenter)
@@ -57,5 +58,13 @@ public class Sword : MonoBehaviour
 
     public float GetPoundDamage() {
         return poundDamage * (Physics.gravity.y / GameControl.main.player.defaultGravity);
+    }
+
+    private void FixedUpdate() {
+        collided = false;
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        collided = true;
     }
 }

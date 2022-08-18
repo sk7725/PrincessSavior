@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
+    private const float MIN_Y = 3;
     [SerializeField] private Vector3 playerCameraOffset;
     [SerializeField] private float cameraSpeed = 2f;
 
@@ -23,6 +24,8 @@ public class CameraControl : MonoBehaviour
         if (GameControl.main.player.state != PlayerControl.State.none) {
             UpdateTarget();
         }
+
+        if(targetPos.y < MIN_Y) targetPos.y = MIN_Y;
 
         currentOffset = Vector3.Lerp(currentOffset, targetOffset, Time.deltaTime * cameraSpeed);
 

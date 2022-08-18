@@ -47,6 +47,7 @@ public class PlayerControl : MonoBehaviour
     public bool landed, pounding, landBounce;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] private Collider col;
+    private Collider[] colresult = new Collider[10];
     private float swordOffset, landBounceTimer;
     private Quaternion? targetRotation;
 
@@ -130,7 +131,10 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case State.pound:
                     if (landed) {
-                        if (pounding) blade.OnPound(heldSword.transform.position);
+                        if (pounding) {
+                            blade.OnPound(heldSword.transform.position);
+                            AreaDamage(heldSword.transform.position, sword.GetPoundDamage(), 1.5f, 8f);
+                        }
                         nextState = State.pick;
                     }
                     break;
@@ -152,6 +156,7 @@ public class PlayerControl : MonoBehaviour
                     animator.Trig(Trigger.thrown);
                     break;
                 case State.thrown:
+                    AreaDamage(heldSword.transform.position, sword.strikeDamage, 1f);
                     ThrowSword();
                     break;
                 case State.pound:
@@ -280,8 +285,9 @@ public class PlayerControl : MonoBehaviour
     private void ThrowSword() {
         landBounce = false;
         sword.gameObject.SetActive(true);
-        sword.transform.position = transform.position + (Vector3)throwOffset;
-        sword.rigid.MoveRotation(throwRotation);
+        //sword.transform.position = transform.position + (Vector3)throwOffset;
+        sword.transform.position = (Vector2)heldSword.transform.position;
+        sword.rigid.MoveRotation(heldSword.transform.rotation);
         Vector3 v = ThrowVector() * handle.throwMultiplier * Mathf.Sqrt(Physics.gravity.y / defaultGravity);
         sword.rigid.velocity = v;
         sword.rigid.angularVelocity = throwTorque;
@@ -308,6 +314,18 @@ public class PlayerControl : MonoBehaviour
         heldSword.SetActive(true);
         Flash(0.3f);
         GameControl.main.camc.UpdateTarget();
+    }
+
+    public void AreaDamage(Vector3 position, float damage, float radius, float knockback = 5f) {
+        int n = Physics.OverlapSphereNonAlloc(position, radius, colresult, 1);
+        for (int i = 0; i < n; i++) {
+            if (colresult[i].gameObject.CompareTag("Enemy")) {
+                Enemy e;
+                if (colresult[i].gameObject.TryGetComponent(out e)) {
+                    e.Damage(damage, knockback, gameObject);
+                }
+            }
+        }
     }
 
     public void Damage(float damage, Enemy enemy = null) {

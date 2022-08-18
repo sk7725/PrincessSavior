@@ -122,7 +122,7 @@ MonoBehaviour:
   magnetRange: {fileID: 3789298693114135904}
   coins: 1
   healAmount: 0
-  magnetStrength: 10
+  magnetStrength: 40
   rotateSpeed: 150
   hitFx: {fileID: 2315629835069471037, guid: ffdf92c91b5bc1044a056b833a63ca95, type: 3}
 --- !u!1001 &2116434579816246037

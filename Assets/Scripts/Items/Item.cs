@@ -43,7 +43,7 @@ public class Item : MonoBehaviour
                 magnetized = false;
                 magnetRange.Unmagnetize();
             }
-            magSpeed += Time.deltaTime * 3f;
+            magSpeed += Time.deltaTime * 8f;
             if (magSpeed > magnetStrength) magSpeed = magnetStrength;
             transform.position = Vector3.MoveTowards(transform.position, GameControl.main.player.PlayerPos(), Time.deltaTime * magSpeed);
         }

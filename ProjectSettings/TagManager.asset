@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Sword
   - MainCanvas
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Enemy
   - Item
   - SwordUI
-  - 
+  - OnlyGround
   - 
   - 
   - 
