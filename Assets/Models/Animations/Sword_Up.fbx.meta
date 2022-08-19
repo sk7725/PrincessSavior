@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 6a68e1299373cd84bbe8f2eff5f0ea6f
+guid: 499a4282a76ae5b408769e3ca0939a8e
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -1498010087492872569
-    second: Falling
+      74: -203655887218126122
+    second: SwordUp
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Falling
-      takeName: CINEMA_4D_Main
+      name: SwordUp
+      takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 135
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

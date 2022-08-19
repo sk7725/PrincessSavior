@@ -29,4 +29,8 @@ public class Accessory : SwordPart {
         GameControl.main.player.accessory = this;
         GameControl.main.player.accessory.OnEquip();
     }
+
+    public override Color GetColor() {
+        return color;
+    }
 }

@@ -4,21 +4,23 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler {
-    [SerializeField] private float zoomFOV = 120f;
+    [SerializeField] private float zoomOffset = -10f;
     [SerializeField] private float zoomSpeed = 6f; 
 
     private bool pressed = false;
-    private float prevFOV, current;
+    private float prevOffset, current;
 
 
     void Start() {
-        prevFOV = GameControl.main.cam.fieldOfView;
-        current = prevFOV;
+        prevOffset = GameControl.main.cam.transform.localPosition.z;
+        current = prevOffset;
     }
 
     void Update() {
-        current = Mathf.Lerp(current, pressed ? zoomFOV : prevFOV, zoomSpeed * Time.deltaTime);
-        GameControl.main.cam.fieldOfView = current;
+        current = Mathf.Lerp(current, pressed ? zoomOffset : prevOffset, zoomSpeed * Time.deltaTime);
+        Vector3 v = GameControl.main.cam.transform.localPosition;
+        v.z = current;
+        GameControl.main.cam.transform.localPosition = v;
     }
 
     public void OnPointerDown(PointerEventData eventData) {

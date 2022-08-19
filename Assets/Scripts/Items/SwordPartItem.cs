@@ -42,13 +42,13 @@ public class SwordPartItem : Item
 
     private Color GetColor() {
         if (blade != null) {
-            return blade.color.Evaluate(0);
+            return blade.GetColor();
         }
         else if (handle != null) {
-            return handle.materials[0].color.Value(1);
+            return handle.GetColor();
         }
         else {
-            return accessory.color;
+            return accessory.GetColor();
         }
     }
 }

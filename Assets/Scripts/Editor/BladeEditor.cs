@@ -12,9 +12,8 @@ public class BladeEditor : Editor {
         bool e = GUILayout.Button("Equip");
         if (e) {
             Blade blade = (Blade)serializedObject.targetObject;
-            GameControl.main.player.blade.OnUnequip();
-            GameControl.main.player.blade = blade;
-            GameControl.main.player.blade.OnEquip();
+            blade.EquipPlayer();
+            GameControl.main.player.OnPartUpdate();
         }
         EditorGUI.EndDisabledGroup();
     }

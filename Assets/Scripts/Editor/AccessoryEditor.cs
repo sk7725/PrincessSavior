@@ -12,9 +12,8 @@ public class AccessoryEditor : Editor {
         bool e = GUILayout.Button("Equip");
         if (e) {
             Accessory accessory = (Accessory)serializedObject.targetObject;
-            GameControl.main.player.accessory.OnUnequip();
-            GameControl.main.player.accessory = accessory;
-            GameControl.main.player.accessory.OnEquip();
+            accessory.EquipPlayer();
+            GameControl.main.player.OnPartUpdate();
         }
         EditorGUI.EndDisabledGroup();
     }

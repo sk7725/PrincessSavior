@@ -380,6 +380,11 @@ public class PlayerControl : MonoBehaviour
     public void OnPartUpdate() {
         //todo fx
         animator.Trig(Trigger.upgrade);
+        StartCoroutine(IPartUpdateFx());
+    }
+
+    private IEnumerator IPartUpdateFx() {
+        yield return new WaitForSeconds(animTime.swordUp);
         Fx(swordUpgradeFx, heldSword.transform.position, heldSword.transform.rotation);
     }
 
@@ -421,6 +426,6 @@ public class PlayerControl : MonoBehaviour
 
     [System.Serializable]
     public class AnimationTime {
-        public float throwing, pound, pick, landBounce;
+        public float throwing, pound, pick, landBounce, swordUp;
     }
 }

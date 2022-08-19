@@ -54,6 +54,10 @@ public class Blade : SwordPart
     }
 
     public override string Description() {
-        return string.Format("{0}\n<color=#007812>[공격력 {1}%]</color>", base.Description(), Mathf.RoundToInt(damageMultiplier * 100));
+        return string.Format("{0}\n<color=blue>[공격력 {1}%]</color>", base.Description(), Mathf.RoundToInt(damageMultiplier * 100));
+    }
+
+    public override Color GetColor() {
+        return color.Evaluate(0);
     }
 }

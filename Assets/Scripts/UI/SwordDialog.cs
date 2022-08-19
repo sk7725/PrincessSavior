@@ -22,7 +22,10 @@ public class SwordDialog : Dialog {
         handleDesc.text = player.handle.Description();
         accn.text = player.accessory.localized;
         accDesc.text = player.accessory.Description();
-        accn.color = player.accessory.color;
+
+        bladen.color = player.blade.GetColor();
+        handlen.color = player.handle.GetColor();
+        accn.color = player.accessory.GetColor();
     }
 
     public void Close() {

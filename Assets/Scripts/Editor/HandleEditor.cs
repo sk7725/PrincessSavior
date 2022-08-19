@@ -12,9 +12,8 @@ public class HandleEditor : Editor {
         bool e = GUILayout.Button("Equip");
         if (e) {
             Handle handle = (Handle)serializedObject.targetObject;
-            GameControl.main.player.handle.OnUnequip();
-            GameControl.main.player.handle = handle;
-            GameControl.main.player.handle.OnEquip();
+            handle.EquipPlayer();
+            GameControl.main.player.OnPartUpdate();
         }
         EditorGUI.EndDisabledGroup();
     }

@@ -8,6 +8,7 @@ TagManager:
   - Sword
   - MainCanvas
   - Ground
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Item
   - SwordUI
   - OnlyGround
-  - 
+  - Background
   - 
   - 
   - 

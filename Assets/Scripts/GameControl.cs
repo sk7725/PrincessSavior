@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour
         main = this; //behold, the laziest singleton(tm) 2; electric boogaloo
         player = GameObject.FindObjectOfType<PlayerControl>();
         cam = Camera.main;
-        camc = cam.GetComponent<CameraControl>();
+        camc = GameObject.FindObjectOfType<CameraControl>();
     }
 
     public bool DialogOpen() {

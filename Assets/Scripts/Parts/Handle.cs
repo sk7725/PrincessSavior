@@ -30,6 +30,10 @@ public class Handle : SwordPart {
     }
 
     public override string Description() {
-        return string.Format("{0}\n<color=#007812>[ด๘ม๖ดย ศ๛ {1}%]</color>", base.Description(), Mathf.RoundToInt(throwMultiplier * 100));
+        return string.Format("{0}\n<color=blue>[ด๘ม๖ดย ศ๛ {1}%]</color>", base.Description(), Mathf.RoundToInt(throwMultiplier * 100));
+    }
+
+    public override Color GetColor() {
+        return materials[0].color.Value(1);
     }
 }

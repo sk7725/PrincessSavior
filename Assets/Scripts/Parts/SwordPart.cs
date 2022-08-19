@@ -18,6 +18,8 @@ public abstract class SwordPart : ScriptableObject
 
     public abstract void EquipPlayer();
 
+    public abstract Color GetColor();
+
     public virtual string Description() {
         return description;
     }
