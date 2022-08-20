@@ -39,8 +39,8 @@ ModelImporter:
       name: Falling
       takeName: CINEMA_4D_Main
       internalID: 0
-      firstFrame: 0
-      lastFrame: 135
+      firstFrame: 4
+      lastFrame: 62
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -5,9 +5,10 @@ using UnityEngine.EventSystems;
 
 public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler {
     [SerializeField] private float zoomOffset = -10f;
+    [SerializeField] private float extraOffset = -10f;
     [SerializeField] private float zoomSpeed = 6f; 
 
-    private bool pressed = false;
+    public static bool pressed = false;
     private float prevOffset, current;
 
 
@@ -17,7 +18,15 @@ public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     }
 
     void Update() {
-        current = Mathf.Lerp(current, pressed ? zoomOffset : prevOffset, zoomSpeed * Time.deltaTime);
+        bool extra = pressed && current < zoomOffset + 0.01f;
+        if (extra) {
+            current -= Time.deltaTime * 2f;
+            if(current < zoomOffset + extraOffset) current = zoomOffset + extraOffset;
+        }
+        else {
+            current = Mathf.Lerp(current, pressed ? zoomOffset : prevOffset, zoomSpeed * Time.deltaTime);
+        }
+        
         Vector3 v = GameControl.main.cam.transform.localPosition;
         v.z = current;
         GameControl.main.cam.transform.localPosition = v;
@@ -32,6 +41,6 @@ public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        pressed = false;
+        //pressed = false;
     }
 }
