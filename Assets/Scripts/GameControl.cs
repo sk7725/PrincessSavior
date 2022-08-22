@@ -15,11 +15,15 @@ public class GameControl : MonoBehaviour
     public Transform playerSpawn;
     public GameObject[] dialogs = { };
 
+    private static float prevTimeScale;
+    public static bool paused = false;
+
     private void Awake() {
         main = this; //behold, the laziest singleton(tm) 2; electric boogaloo
         player = GameObject.FindObjectOfType<PlayerControl>();
         cam = Camera.main;
         camc = GameObject.FindObjectOfType<CameraControl>();
+        paused = false;
     }
 
     public bool DialogOpen() {
@@ -27,5 +31,18 @@ public class GameControl : MonoBehaviour
             if(dialog.activeInHierarchy) return true;
         }
         return false;
+    }
+
+    public static void Pause() {
+        if(paused) return;
+        paused = true;
+        prevTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+    }
+
+    public static void Unpause() {
+        if(!paused) return;
+        paused = false;
+        Time.timeScale = prevTimeScale;
     }
 }

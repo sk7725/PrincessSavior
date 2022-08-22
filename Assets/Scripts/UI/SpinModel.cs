@@ -8,6 +8,6 @@ public class SpinModel : MonoBehaviour
 
     void Update()
     {
-        transform.rotation *= Quaternion.Euler(0, speed * Time.deltaTime, 0);
+        transform.rotation *= Quaternion.Euler(0, speed * Time.unscaledDeltaTime, 0);
     }
 }

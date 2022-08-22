@@ -14,6 +14,7 @@ public class SwordDialog : Dialog {
     }
 
     public override void Build() {
+        base.Build();
         PlayerControl player = GameControl.main.player;
 
         bladen.text = player.blade.localized;
@@ -26,9 +27,5 @@ public class SwordDialog : Dialog {
         bladen.color = player.blade.GetColor();
         handlen.color = player.handle.GetColor();
         accn.color = player.accessory.GetColor();
-    }
-
-    public void Close() {
-        gameObject.SetActive(false);
     }
 }
