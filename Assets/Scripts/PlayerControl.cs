@@ -7,7 +7,7 @@ using static PlayerRenderer;
 
 public class PlayerControl : MonoBehaviour
 {
-    public const float MIN_DRAG_LEN2 = 0.15f, HEIGHT = 2f;
+    public const float MIN_DRAG_LEN2 = 0.2f, HEIGHT = 2f;
     private const float INVIN_TIME = 0.5f, DEATH_BARRIER = -40f;
 
     [Header("Settings")]
@@ -55,6 +55,9 @@ public class PlayerControl : MonoBehaviour
     public int coins = 0;
     [System.NonSerialized] public bool swordPopupActive = false, dead = false;
     private float invincibility;
+
+    private Collider[] groundCol = new Collider[1];
+    private MeshEffectGroup.MeshEffect lastMeshEffect;
 
     //inputs
     public bool dragged;
@@ -131,10 +134,6 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case State.pound:
                     if (landed) {
-                        if (pounding) {
-                            blade.OnPound(heldSword.transform.position);
-                            AreaDamage(heldSword.transform.position, sword.GetPoundDamage(), 1.5f, 8f);
-                        }
                         nextState = State.pick;
                     }
                     break;
@@ -164,6 +163,15 @@ public class PlayerControl : MonoBehaviour
                     targetRotation = sword.rigid.velocity.x > 0 ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
                     CatchSword();
                     break;
+                case State.pick:
+                    if (pounding) {
+                        Vector3 hs = heldSword.transform.position;
+                        hs.y = transform.position.y - HEIGHT / 2f;
+                        blade.OnPound(hs);
+                        AreaDamage(hs, sword.GetPoundDamage(), 1.5f, 8f);
+                        if(lastMeshEffect != null) Fx(lastMeshEffect.hitFx, hs, Quaternion.identity);
+                    }
+                    break;
             }
             stateTime = 0f;
         }
@@ -176,7 +184,6 @@ public class PlayerControl : MonoBehaviour
                         rigid.velocity = Vector3.zero;
                         pounding = true;
                     }
-                    rigid.AddForce(Vector3.down * poundStr * (Physics.gravity.y / defaultGravity), ForceMode.VelocityChange);
                 }
                 else {
                     //lerp animator z
@@ -186,6 +193,10 @@ public class PlayerControl : MonoBehaviour
         }
 
         UpdateAnimator(updateTransform);
+    }
+
+    private void FixedUpdate() {
+        if(!dead && state == State.pound && pounding) rigid.AddForce(Vector3.down * poundStr * (Physics.gravity.y / defaultGravity) * 60, ForceMode.Acceleration);
     }
 
     private void UpdateInput() {
@@ -269,7 +280,9 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void CheckLanded() {
-        landed = Physics.CheckSphere(new Vector3(col.bounds.center.x, col.bounds.center.y - ((HEIGHT - 1f) / 2 + 0.15f), col.bounds.center.z), 0.45f, 1 << 6, QueryTriggerInteraction.Ignore);
+        bool prevl = landed;
+        landed = Physics.OverlapSphereNonAlloc(new Vector3(col.bounds.center.x, col.bounds.center.y - ((HEIGHT - 1f) / 2 + 0.15f), col.bounds.center.z), 0.45f, groundCol, 1 << 6, QueryTriggerInteraction.Ignore) > 0;
+        if (!prevl && landed && groundCol[0] is MeshCollider m) lastMeshEffect = m.MeshEffect();
     }
 
     private void CheckDeath() {
@@ -335,7 +348,7 @@ public class PlayerControl : MonoBehaviour
         }
         else {
             if (invincibility > 0) return;
-            if(enemy != null && pounding) {
+            if(enemy != null && pounding && state == State.pound) {
                 //actually, the enemy should be dying
                 enemy.Damage(sword.GetPoundDamage() * blade.damageMultiplier, 8f, gameObject);
             }

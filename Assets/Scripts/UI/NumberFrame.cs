@@ -16,8 +16,8 @@ public class NumberFrame : MonoBehaviour {
         time += Time.deltaTime;
         int hours = (int)(time / 60 / 60);
         //todo append zeros
-        timet.text = hours > 0 ? string.Format("{0}:{1}:{2}.{3}", hours, (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000))
-            : string.Format("{0}:{1}.{2}", (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000));
+        timet.text = hours > 0 ? string.Format("{0}:{1,2:D2}:{2,2:D2}.{3,3:D3}", hours, (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000))
+            : string.Format("{0}:{1,2:D2}.{2,3:D3}", (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000));
         coint.text = GameControl.main.player.coins.ToString();
         coinRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, coint.preferredWidth);
     }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3363421773142091663}
   - component: {fileID: 2788921515834530365}
   - component: {fileID: 3933743137866872812}
+  - component: {fileID: 1593814706793434015}
   m_Layer: 6
   m_Name: IceIsland
   m_TagString: Ground
@@ -98,3 +99,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5302568919011541938, guid: 0bc0a81557196b04791f8cd7ce7877ac, type: 3}
+--- !u!114 &1593814706793434015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485761323244082300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e2f6c97cf519c4abc01ddbd4160605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes:
+  - collider: {fileID: 3933743137866872812}
+    hitFx: {fileID: 1040608886635896, guid: 387104eba700a9841ae88d76c1dd6372, type: 3}
+    hitSound: {fileID: 0}

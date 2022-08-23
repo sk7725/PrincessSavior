@@ -9,6 +9,7 @@ public class ArrowUpdater : MonoBehaviour
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Gradient color;
     [SerializeField] private float widthMultiplier = 0.2f;
+    [SerializeField] private float playerOffset = 1f;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class ArrowUpdater : MonoBehaviour
                 enabled = false;
             }
             else {
-                transform.position = player.transform.position + (Vector3)v * widthMultiplier / 4f;
+                transform.position = player.transform.position + (Vector3)v * widthMultiplier / 4f + (Vector3)v.normalized * playerOffset;
                 transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, v));
                 sprite.size = new Vector2(len * widthMultiplier, sprite.size.y);
                 sprite.color = color.Evaluate(len / (player.maxDragLength * player.throwStr));

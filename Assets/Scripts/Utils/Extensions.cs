@@ -28,4 +28,28 @@ public static class Extensions
         color = Color.HSVToRGB(h, s, amount);
         return color;
     }
+
+    public static MeshEffectGroup.MeshEffect MeshEffect(this Collision collision) {
+        MeshEffectGroup effectGroup;
+        if ((collision.collider is MeshCollider mc) && collision.gameObject.TryGetComponent(out effectGroup)) {
+            foreach(MeshEffectGroup.MeshEffect effect in effectGroup.meshes) {
+                if(effect.collider == mc) {
+                    return effect;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static MeshEffectGroup.MeshEffect MeshEffect(this MeshCollider mc) {
+        MeshEffectGroup effectGroup;
+        if (mc.gameObject.TryGetComponent(out effectGroup)) {
+            foreach (MeshEffectGroup.MeshEffect effect in effectGroup.meshes) {
+                if (effect.collider == mc) {
+                    return effect;
+                }
+            }
+        }
+        return null;
+    }
 }

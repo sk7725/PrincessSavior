@@ -4,6 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "VelocityHandle", menuName = "Sword/HandleVelocity", order = 148)]
 public class VelocityHandle : Handle {
+    private WaitForFixedUpdate fixednull = new WaitForFixedUpdate();
     public float duration = 2f;
     public Vector2 velocity;
     private uint throwid = 0;
@@ -19,9 +20,9 @@ public class VelocityHandle : Handle {
         uint cid = throwid;
         float time = 0;
         while (time < duration && cid == throwid && GameControl.main.player.sword.gameObject.activeInHierarchy) {
-            yield return null;
+            yield return fixednull;
             time += Time.deltaTime;
-            GameControl.main.player.sword.rigid.AddForce(velocity, ForceMode.VelocityChange);
+            GameControl.main.player.sword.rigid.AddForce(velocity * 60, ForceMode.Acceleration);
         }
     }
 

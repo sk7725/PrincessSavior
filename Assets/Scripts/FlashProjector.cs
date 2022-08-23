@@ -9,6 +9,10 @@ public class FlashProjector : MonoBehaviour
     private float time = 0f, duration = 1f;
     private Gradient color;
 
+    private void Awake() {
+        projector.material = new Material(projector.material);
+    }
+
     void Update()
     {
         if(time <= 0f) {

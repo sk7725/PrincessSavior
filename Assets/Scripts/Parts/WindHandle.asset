@@ -20,4 +20,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1093e92d9c97acd4198e3c36fabd24cb, type: 2}
   throwMultiplier: 0.8
   duration: 1.5
-  velocity: {x: 0, y: 0.1}
+  velocity: {x: 0, y: 0.15}
