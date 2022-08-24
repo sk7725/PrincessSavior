@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    private const float MIN_Y = 3;
+    public const float MIN_Y = 3;
     [SerializeField] private Vector3 playerCameraOffset;
     [SerializeField] private float cameraSpeed = 2f;
 

@@ -6,6 +6,8 @@ public class Settings
 {
     private static string _prefsKey = null;
 
+    private static float? _vMusic = null;
+    private static float? _vSound = null;
     private static float? _flingSensitivity = null;
 
     private static string PrefsKey {
@@ -15,6 +17,38 @@ public class Settings
             }
 
             return _prefsKey;
+        }
+    }
+
+    public static float VolumeSound {
+        get {
+            if (_vSound == null) {
+                _vSound = PlayerPrefs.GetFloat($"{PrefsKey}.vsound", 1f);
+            }
+
+            return _vSound.Value;
+        }
+        set {
+            if (_vSound != value) {
+                _vSound = value;
+                PlayerPrefs.SetFloat($"{PrefsKey}.vsound", value);
+            }
+        }
+    }
+
+    public static float VolumeMusic {
+        get {
+            if (_vMusic == null) {
+                _vMusic = PlayerPrefs.GetFloat($"{PrefsKey}.vmusic", 1f);
+            }
+
+            return _vMusic.Value;
+        }
+        set {
+            if (_vMusic != value) {
+                _vMusic = value;
+                PlayerPrefs.SetFloat($"{PrefsKey}.vmusic", value);
+            }
         }
     }
 
