@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6184310916376626353
+--- !u!1 &6019086280811597010
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6816416493857889803}
-  - component: {fileID: 7581560636598669742}
-  - component: {fileID: 5680141334713509220}
-  - component: {fileID: 4676888415153083067}
-  - component: {fileID: 5890897978200474646}
+  - component: {fileID: 2912223440590637671}
+  - component: {fileID: 7787501654182713903}
+  - component: {fileID: 780532231761114255}
   m_Layer: 6
-  m_Name: WoodIsland
-  m_TagString: Ground
+  m_Name: Render
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6816416493857889803
+--- !u!4 &2912223440590637671
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6184310916376626353}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 6019086280811597010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 6816416493857889803}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7581560636598669742
+--- !u!33 &7787501654182713903
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6184310916376626353}
+  m_GameObject: {fileID: 6019086280811597010}
   m_Mesh: {fileID: 4801998566389651506, guid: 1afd6c77ae9d5a8448269dc6aa92d9b9, type: 3}
---- !u!23 &5680141334713509220
+--- !u!23 &780532231761114255
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6184310916376626353}
+  m_GameObject: {fileID: 6019086280811597010}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,6 +83,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6184310916376626353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6816416493857889803}
+  - component: {fileID: 4676888415153083067}
+  - component: {fileID: 5890897978200474646}
+  - component: {fileID: 7090819069261854030}
+  m_Layer: 6
+  m_Name: WoodIsland
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6816416493857889803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184310916376626353}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 2912223440590637671}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &4676888415153083067
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -114,4 +147,22 @@ MonoBehaviour:
   meshes:
   - collider: {fileID: 4676888415153083067}
     hitFx: {fileID: 1040608886635896, guid: 1e0de5ce5a19c52448069b6b0efae2d5, type: 3}
-    hitSound: {fileID: 0}
+    hitSound: {fileID: 8300000, guid: 4f81dcbb0baca104d8b58a92bc77a7dd, type: 3}
+--- !u!114 &7090819069261854030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184310916376626353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3b3a36e2fb2064784782422fb84fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render: {fileID: 6019086280811597010}
+  duration: 3
+  shakeDuration: 2
+  respawn: 3
+  shake: 0.2
+  breakFx: {fileID: 1040608886635896, guid: e96676cdebe84d54b8ac65c27fd92937, type: 3}

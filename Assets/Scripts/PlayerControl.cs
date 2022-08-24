@@ -39,6 +39,10 @@ public class PlayerControl : MonoBehaviour
     public GameObject catchFx;
     public GameObject catchPrevFx, swordUpgradeFx;
 
+    [Header("Sfx")]
+    public AudioClip landSound;
+    public AudioClip throwSound, catchSound, swordUpgradeSound, damageSound;
+
     [Header("Debugging")]
     public State state;
     public State nextState;
@@ -47,11 +51,12 @@ public class PlayerControl : MonoBehaviour
     public bool landed, pounding, landBounce;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] private Collider col;
+    [HideInInspector] private AudioSource audios;
     private Collider[] colresult = new Collider[10];
     private float swordOffset, landBounceTimer;
     private Quaternion? targetRotation;
 
-    [System.NonSerialized] public float health;
+    public float health;
     public int coins = 0;
     [System.NonSerialized] public bool swordPopupActive = false, dead = false;
     private float invincibility;
@@ -75,6 +80,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake() {
         rigid = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        audios = GetComponent<AudioSource>();
         health = maxHealth;
         Physics.gravity = Vector2.up * defaultGravity;
     }
@@ -153,6 +159,7 @@ public class PlayerControl : MonoBehaviour
             switch (state) {
                 case State.preThrow:
                     animator.Trig(Trigger.thrown);
+                    audios.PlayOneShot(throwSound, 0.4f);
                     break;
                 case State.thrown:
                     AreaDamage(heldSword.transform.position, sword.strikeDamage, 1f);
@@ -169,7 +176,12 @@ public class PlayerControl : MonoBehaviour
                         hs.y = transform.position.y - HEIGHT / 2f;
                         blade.OnPound(hs);
                         AreaDamage(hs, sword.GetPoundDamage(), 1.5f, 8f);
-                        if(lastMeshEffect != null) Fx(lastMeshEffect.hitFx, hs, Quaternion.identity);
+                        if (lastMeshEffect != null) {
+                            Fx(lastMeshEffect.hitFx, hs, Quaternion.identity);
+                            if (lastMeshEffect.hitSound != null) {
+                                audios.PlayOneShot(lastMeshEffect.hitSound);
+                            }
+                        }
                     }
                     break;
             }
@@ -283,6 +295,9 @@ public class PlayerControl : MonoBehaviour
         bool prevl = landed;
         landed = Physics.OverlapSphereNonAlloc(new Vector3(col.bounds.center.x, col.bounds.center.y - ((HEIGHT - 1f) / 2 + 0.15f), col.bounds.center.z), 0.45f, groundCol, 1 << 6, QueryTriggerInteraction.Ignore) > 0;
         if (!prevl && landed && groundCol[0] is MeshCollider m) lastMeshEffect = m.MeshEffect();
+        if(!prevl && landed) {
+            audios.PlayOneShot(landSound, Mathf.Clamp01(-rigid.velocity.y / 10f));
+        }
     }
 
     private void CheckDeath() {
@@ -327,6 +342,7 @@ public class PlayerControl : MonoBehaviour
         heldSword.SetActive(true);
         Flash(0.3f);
         GameControl.main.camc.UpdateTarget();
+        audios.PlayOneShot(catchSound, 0.35f);
     }
 
     public void AreaDamage(Vector3 position, float damage, float radius, float knockback = 5f) {
@@ -362,6 +378,7 @@ public class PlayerControl : MonoBehaviour
                     rigid.velocity = (Vector3.up + Vector3.right * (right ? 1f : -1f)) * enemy.knockback;
                 }
                 animator.Trig(Trigger.hurt);
+                audios.PlayOneShot(damageSound);
             }
         }
     }
@@ -399,6 +416,7 @@ public class PlayerControl : MonoBehaviour
     private IEnumerator IPartUpdateFx() {
         yield return new WaitForSeconds(animTime.swordUp);
         Fx(swordUpgradeFx, heldSword.transform.position, heldSword.transform.rotation);
+        audios.PlayOneShot(swordUpgradeSound);
     }
 
     private Vector2 FingerPos() {

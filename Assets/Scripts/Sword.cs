@@ -5,6 +5,8 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     private const float MOVE_THRESH2 = 0.01f;
+    [Header("Preset Fields")]
+    [SerializeField] private AudioSource audios;
 
     [Header("Settings")]
     public float throwDamage = 8f, strikeDamage = 15f, poundDamage = 25f;
@@ -14,6 +16,7 @@ public class Sword : MonoBehaviour
 
     [HideInInspector] public Rigidbody rigid;
     private float time = 0f;
+    private float audioTime = 0f;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody>();
@@ -21,6 +24,7 @@ public class Sword : MonoBehaviour
 
     private void Update() {
         time += Time.deltaTime;
+        if(audioTime > 0f) audioTime -= Time.deltaTime;
         CheckLanded();
     }
 
@@ -66,5 +70,19 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionStay(Collision collision) {
         collided = true;
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if (audioTime <= 0f && !landed && collision.collider.CompareTag("Ground") && collision.collider is MeshCollider mesh) {
+            MeshEffectGroup.MeshEffect me = mesh.MeshEffect();
+            if(me != null && me.hitSound != null) {
+                audios.clip = me.hitSound;
+                audios.pitch = Random.Range(0.9f, 1.1f);
+                audios.volume = Mathf.Clamp(rigid.velocity.sqrMagnitude / 16f, 0.3f, 1f) * 0.6f;
+                audios.Play();
+                //audios.PlayOneShot(me.hitSound, Mathf.Clamp(rigid.velocity.sqrMagnitude / 16f, 0.3f, 1f) * 0.6f);
+                audioTime = 0.3f;
+            }
+        }
     }
 }

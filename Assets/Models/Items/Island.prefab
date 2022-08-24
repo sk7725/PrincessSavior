@@ -114,4 +114,4 @@ MonoBehaviour:
   meshes:
   - collider: {fileID: -99694841613180120}
     hitFx: {fileID: 1040608886635896, guid: bd92df1ef574b9f47adaeeac0c2876dd, type: 3}
-    hitSound: {fileID: 0}
+    hitSound: {fileID: 8300000, guid: 5bf5c82b530e98549b06c8427d4b8260, type: 3}

@@ -51,6 +51,6 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   strikeFx: {fileID: 0}
   throwFx: {fileID: 0}
-  poundFx: {fileID: 0}
+  poundFx: {fileID: 1134129239631916, guid: ac3951e598fbb504fb8c98486a093dbe, type: 3}
   thrownHitFx: {fileID: 100002, guid: 4e8bc2da459b5d44780767cf2566b4a8, type: 3}
   bounceFx: {fileID: 9001223473084519564, guid: e13b09ace12e0f447a139454416b3eb3, type: 3}
