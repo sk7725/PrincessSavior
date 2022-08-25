@@ -19,7 +19,7 @@ public class CameraControl : MonoBehaviour
         targetPos = GameControl.main.player.transform.position + playerCameraOffset;
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (GameControl.main.player.state != PlayerControl.State.none) {
             UpdateTarget();
