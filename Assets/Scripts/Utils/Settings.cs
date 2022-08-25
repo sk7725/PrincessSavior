@@ -9,6 +9,7 @@ public class Settings
     private static int? _vMusic = null; //0-100
     private static int? _vSound = null; //0-100
     private static float? _flingSensitivity = null;
+    public static bool? _holdZoom = null;
 
     private static string PrefsKey {
         get {
@@ -66,6 +67,22 @@ public class Settings
             if (_flingSensitivity != value) {
                 _flingSensitivity = value;
                 PlayerPrefs.SetFloat($"{PrefsKey}.flings", value);
+            }
+        }
+    }
+
+    public static bool HoldZoomDown {
+        get {
+            if (_holdZoom == null) {
+                _holdZoom = PlayerPrefs.GetInt($"{PrefsKey}.holdzoom", 0) == 1;
+            }
+
+            return _holdZoom.Value;
+        }
+        set {
+            if (_holdZoom != value) {
+                _holdZoom = value;
+                PlayerPrefs.SetInt($"{PrefsKey}.holdzoom", value ? 1 : 0);
             }
         }
     }
