@@ -51,7 +51,7 @@ public class PlayerControl : MonoBehaviour
     public bool landed, pounding, landBounce;
     [HideInInspector] public Rigidbody rigid;
     [HideInInspector] private Collider col;
-    [HideInInspector] private AudioSource audios;
+    [HideInInspector] public AudioSource audios;
     private Collider[] colresult = new Collider[10];
     private float swordOffset, landBounceTimer;
     private Quaternion? targetRotation;

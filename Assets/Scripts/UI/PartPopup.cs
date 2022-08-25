@@ -8,6 +8,7 @@ public class PartPopup : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameText, costText;
     [SerializeField] private Button yesb, nob;
+    [SerializeField] private AudioClip yesSound;
 
     private SwordPart part = null;
     private bool clicked = false;
@@ -42,6 +43,7 @@ public class PartPopup : MonoBehaviour
         GameControl.main.player.coins -= part.cost;
         part.EquipPlayer();
         GameControl.main.player.OnPartUpdate();
+        GameControl.main.player.audios.PlayOneShot(yesSound);
 
         StartCoroutine(IClose());
     }
