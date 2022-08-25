@@ -61,7 +61,7 @@ public class Item : MonoBehaviour
         if (healAmount != 0f) {
             GameControl.main.player.Damage(-healAmount);
         }
-        GameControl.main.player.coins += coins;
+        GameControl.main.player.coins += coins * GameControl.main.player.accessory.scoreMultiplier;
     }
 
     public virtual bool CanCollect() {
