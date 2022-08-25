@@ -27,6 +27,6 @@ public class UnpackCoins
 
     [MenuItem("GameObject/Unpack Coins", true)]
     public static bool CoinCheck() {
-        return Selection.activeGameObject != null && Selection.activeGameObject.transform.childCount > 0 && Selection.activeGameObject.transform.parent != null;
+        return Selection.activeGameObject != null && Selection.activeGameObject.transform.childCount > 2 && Selection.activeGameObject.transform.parent != null;
     }
 }
