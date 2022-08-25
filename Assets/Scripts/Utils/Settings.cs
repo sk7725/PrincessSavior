@@ -6,8 +6,8 @@ public class Settings
 {
     private static string _prefsKey = null;
 
-    private static float? _vMusic = null;
-    private static float? _vSound = null;
+    private static int? _vMusic = null; //0-100
+    private static int? _vSound = null; //0-100
     private static float? _flingSensitivity = null;
 
     private static string PrefsKey {
@@ -20,10 +20,10 @@ public class Settings
         }
     }
 
-    public static float VolumeSound {
+    public static int VolumeSound {
         get {
             if (_vSound == null) {
-                _vSound = PlayerPrefs.GetFloat($"{PrefsKey}.vsound", 1f);
+                _vSound = PlayerPrefs.GetInt($"{PrefsKey}.vsound", 100);
             }
 
             return _vSound.Value;
@@ -31,15 +31,16 @@ public class Settings
         set {
             if (_vSound != value) {
                 _vSound = value;
-                PlayerPrefs.SetFloat($"{PrefsKey}.vsound", value);
+                PlayerPrefs.SetInt($"{PrefsKey}.vsound", value);
+                AudioControl.main.SetSound(_vSound.Value / 100f);
             }
         }
     }
 
-    public static float VolumeMusic {
+    public static int VolumeMusic {
         get {
             if (_vMusic == null) {
-                _vMusic = PlayerPrefs.GetFloat($"{PrefsKey}.vmusic", 1f);
+                _vMusic = PlayerPrefs.GetInt($"{PrefsKey}.vmusic", 100);
             }
 
             return _vMusic.Value;
@@ -47,7 +48,8 @@ public class Settings
         set {
             if (_vMusic != value) {
                 _vMusic = value;
-                PlayerPrefs.SetFloat($"{PrefsKey}.vmusic", value);
+                PlayerPrefs.SetInt($"{PrefsKey}.vmusic", value);
+                AudioControl.main.SetMusic(-_vMusic.Value / 100f);
             }
         }
     }

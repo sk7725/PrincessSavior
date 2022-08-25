@@ -390,6 +390,7 @@ public class PlayerControl : MonoBehaviour
         if (coins < 0) coins = 0;
 
         //todo death effect
+        animator.Trig(Trigger.dies);
         Invoke("ReturnCheckpoint", 3f);
     }
 

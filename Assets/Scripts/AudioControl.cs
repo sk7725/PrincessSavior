@@ -7,25 +7,28 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioControl : MonoBehaviour {
+    public static AudioControl main;
     public AudioMixer mixer;
 
+    private void Awake() {
+        main = this;
+    }
+
     private void Start() {
-
+        SetSound(Settings.VolumeSound / 100f);
+        SetMusic(Settings.VolumeMusic / 100f);
     }
 
-    private void Update() {
-
-    }
-
-    private void SetSound(float volume) {
+    public void SetSound(float volume) {
         mixer.SetFloat("vSound", ToDecibel(volume));
     }
 
-    private void SetMusic(float volume) {
+    public void SetMusic(float volume) {
         mixer.SetFloat("vMusic", ToDecibel(volume));
     }
 
     public static float ToDecibel(float volume) {
+        if (volume <= 0.1f) return -80;
         return Mathf.Log10(volume) * 20;
     }
 

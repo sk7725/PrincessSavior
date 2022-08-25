@@ -82,13 +82,13 @@ Material:
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
+    - _StencilReadMask: 1
+    - _StencilWriteMask: 0
     - _TextureHeight: 4096
     - _TextureWidth: 4096
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0.3
-    - _UnderlayOffsetY: -0.14
+    - _UnderlayDilate: 0.04
+    - _UnderlayOffsetX: 0.269
+    - _UnderlayOffsetY: -0.203
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0

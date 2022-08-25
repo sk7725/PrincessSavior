@@ -10,7 +10,8 @@ public class PlayerRenderer : MonoBehaviour
     public enum Trigger {
         thrown,
         upgrade,
-        hurt
+        hurt,
+        dies
     }
 
     private void Start()
