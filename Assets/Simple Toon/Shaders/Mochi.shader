@@ -39,13 +39,13 @@ Shader "Simple Toon/Colored Outline"
 
     SubShader
     {
-        Pass
+        /*Pass
         {
 			Tags { "RenderType" = "Opaque" "LightMode" = "ForwardBase" }
 			Blend Off
             Cull Front
-            ZWrite Off
-            ZTest Always
+            //ZWrite Off
+            //ZTest Always
 
             CGPROGRAM
             #pragma vertex vert
@@ -88,13 +88,13 @@ Shader "Simple Toon/Colored Outline"
 			}
 
             ENDCG
-        }
+        }*/
 
         Tags { "RenderType" = "Opaque" "LightMode" = "ForwardBase" }
         Pass
         {
             Name "DirectLight"
-            LOD 80
+            LOD 300
 
             CGPROGRAM
             #pragma vertex vert
@@ -176,7 +176,7 @@ Shader "Simple Toon/Colored Outline"
         {
             Name "SpotLight"
             BlendOp Max
-            LOD 100
+            LOD 300
 
             CGPROGRAM
             #pragma vertex vert

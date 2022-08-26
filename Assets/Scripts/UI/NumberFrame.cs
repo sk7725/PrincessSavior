@@ -6,7 +6,7 @@ using TMPro;
 public class NumberFrame : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI timet, coint;
     [SerializeField] private RectTransform coinRect;
-    public double time = 0;
+    public static double time = 0;
 
     void Start() {
         time = 0;

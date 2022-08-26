@@ -29,9 +29,18 @@ public class FlipbookPlayer : MonoBehaviour {
         StartCoroutine(INext());
     }
 
+
+    public void End() {
+        StopAllCoroutines();
+        current = pages.Length - 1;
+        image.sprite = pages[pages.Length - 1];
+        group.alpha = 1f;
+    }
+
     private void Clicked() {
         if (ended) return;
         StopAllCoroutines();
+        group.alpha = 1;
         StartCoroutine(INext());
     }
 
@@ -56,6 +65,6 @@ public class FlipbookPlayer : MonoBehaviour {
         group.alpha = 1;
 
         yield return new WaitForSeconds(showTime);
-        StartCoroutine(INext());
+        if(!ended) StartCoroutine(INext());
     }
 }

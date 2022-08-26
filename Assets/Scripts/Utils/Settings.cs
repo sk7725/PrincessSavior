@@ -10,7 +10,8 @@ public class Settings
     private static int? _vSound = null; //0-100
     private static float? _flingSensitivity = null;
     private static bool? _holdZoom = null;
-    private static bool? _intro = null;
+    private static float? _time = null;
+    public static float? _bestTime = null; //todo set to double
 
     private static string PrefsKey {
         get {
@@ -88,7 +89,39 @@ public class Settings
         }
     }
 
-    
+    public static float TimeRecord {
+        get {
+            if (_time == null) {
+                _time = PlayerPrefs.GetFloat($"{PrefsKey}.time", -1f);
+            }
+
+            return _time.Value;
+        }
+        set {
+            if (_time != value) {
+                _time = value;
+                PlayerPrefs.SetFloat($"{PrefsKey}.time", value);
+            }
+        }
+    }
+
+    public static float BestTimeRecord {
+        get {
+            if (_bestTime == null) {
+                _bestTime = PlayerPrefs.GetFloat($"{PrefsKey}.btime", -1f);
+            }
+
+            return _bestTime.Value;
+        }
+        set {
+            if (_bestTime != value) {
+                _bestTime = value;
+                PlayerPrefs.SetFloat($"{PrefsKey}.btime", value);
+            }
+        }
+    }
+
+
     /*public static bool SawIntro {
         get {
             if (_intro == null) {
