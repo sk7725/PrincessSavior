@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 7f865f0433a45df41813303f83ded1c8, type: 2}
+  broadcasterPrefab: {fileID: 4368235031407548366, guid: d8fb2d4ec4faea348adf4eef86b13019, type: 3}

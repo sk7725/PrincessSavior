@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler {
     [SerializeField] private float zoomOffset = -10f;
     [SerializeField] private float extraOffset = -10f;
-    [SerializeField] private float zoomSpeed = 6f; 
+    [SerializeField] private float zoomSpeed = 6f;
+    [SerializeField] private AudioClip clip;
 
     public static bool pressed = false;
     private bool toggled = false;
@@ -37,6 +38,7 @@ public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private void Clicked() {
         toggled = !toggled;
+        if (!Settings.HoldZoomDown) AudioControl.Broadcast(clip);
     }
 
     private bool Pressed() {
@@ -45,6 +47,7 @@ public class ZoomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerDown(PointerEventData eventData) {
         pressed = true;
+        if (Settings.HoldZoomDown) AudioControl.Broadcast(clip);
     }
 
     public void OnPointerUp(PointerEventData eventData) {

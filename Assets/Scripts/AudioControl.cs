@@ -9,9 +9,14 @@ using UnityEngine.Audio;
 public class AudioControl : MonoBehaviour {
     public static AudioControl main;
     public AudioMixer mixer;
+    [System.NonSerialized] public AudioSource broadcaster;
+    [SerializeField] private GameObject broadcasterPrefab;
 
     private void Awake() {
         main = this;
+        GameObject br = GameObject.FindGameObjectWithTag("AudioBroadcaster");
+        if(br == null) br = Instantiate(broadcasterPrefab, Vector3.zero, Quaternion.identity);
+        broadcaster = br.GetComponent<AudioSource>();
     }
 
     private void Start() {
@@ -30,6 +35,10 @@ public class AudioControl : MonoBehaviour {
     public static float ToDecibel(float volume) {
         if (volume <= 0.1f) return -80;
         return Mathf.Log10(volume) * 20;
+    }
+
+    public static void Broadcast(AudioClip clip, float volume = 1f) {
+        main.broadcaster.PlayOneShot(clip, volume);
     }
 
 #if UNITY_EDITOR

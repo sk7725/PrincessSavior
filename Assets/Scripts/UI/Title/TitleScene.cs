@@ -11,15 +11,15 @@ public class TitleScene : MonoBehaviour {
     public Button startButton;
     public Sprite startPressed;
     public Image arrow;
-    public AudioSource audios, bgm; //todo sound
+    public AudioSource audios, bgm, drumroll; //todo sound
     public AudioClip startSound, titleAppearSound;
 
     public float blinkRate = 1f;
-    private bool started = false;
+    private bool started = false, pressedStart = false;
 
     private void Awake() {
         Time.timeScale = 1f;
-        started = false;
+        started = pressedStart = false;
         foreach (GameObject go in afterStart) {
             go.SetActive(false);
         }
@@ -41,11 +41,14 @@ public class TitleScene : MonoBehaviour {
             go.SetActive(true);
         }
         StartCoroutine(IFlash(1f));
+        drumroll.Stop();
         audios.PlayOneShot(titleAppearSound);
         bgm.Play();
     }
 
     private void StartClicked() {
+        if (pressedStart) return;
+        pressedStart = true;
         startButton.GetComponent<Image>().sprite = startPressed;
         audios.PlayOneShot(startSound);
         started = false;

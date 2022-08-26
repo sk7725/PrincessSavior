@@ -100,6 +100,8 @@ public class PlayerControl : MonoBehaviour
         landed = pounding = false;
         swordPopupActive = false;
         coins = 0;
+
+        animator.Trig(Trigger.upgrade);
     }
 
     void Update()

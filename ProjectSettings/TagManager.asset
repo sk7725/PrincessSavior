@@ -9,6 +9,7 @@ TagManager:
   - MainCanvas
   - Ground
   - FxTemporaire
+  - AudioBroadcaster
   layers:
   - Default
   - TransparentFX
