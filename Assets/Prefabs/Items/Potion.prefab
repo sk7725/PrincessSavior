@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetRange: {fileID: 7156561189503781131}
   coins: 0
-  healAmount: 15
+  healAmount: 30
   magnetStrength: 20
   rotateSpeed: 150
   hitFx: {fileID: 2315629835069471037, guid: 5f14560636d18054299af1148b5460a8, type: 3}

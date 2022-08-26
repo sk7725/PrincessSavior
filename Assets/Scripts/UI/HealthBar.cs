@@ -24,7 +24,6 @@ public class HealthBar : MonoBehaviour {
         if(Mathf.Abs(GameControl.main.player.health - deltaHp) > 0.1f) {
             deltaHp = GameControl.main.player.health;
             time = showTime;
-            Debug.Log(deltaHp);
         }
 
         if (time > 0) {
