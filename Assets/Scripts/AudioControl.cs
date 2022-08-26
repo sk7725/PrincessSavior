@@ -10,6 +10,7 @@ public class AudioControl : MonoBehaviour {
     public static AudioControl main;
     public AudioMixer mixer;
     [System.NonSerialized] public AudioSource broadcaster;
+    [System.NonSerialized] public AudioSource music;
     [SerializeField] private GameObject broadcasterPrefab;
 
     private void Awake() {
@@ -17,6 +18,7 @@ public class AudioControl : MonoBehaviour {
         GameObject br = GameObject.FindGameObjectWithTag("AudioBroadcaster");
         if(br == null) br = Instantiate(broadcasterPrefab, Vector3.zero, Quaternion.identity);
         broadcaster = br.GetComponent<AudioSource>();
+        music = GetComponent<AudioSource>();
     }
 
     private void Start() {

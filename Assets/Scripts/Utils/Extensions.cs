@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,5 +52,45 @@ public static class Extensions
             }
         }
         return null;
+    }
+
+    public static void FadeOut(this AudioSource source, float duration, MonoBehaviour caller) {
+        caller.StartCoroutine(IFadeOut(source, duration, null));
+    }
+
+    public static void FadeOut(this AudioSource source, float duration, Action endAction, MonoBehaviour caller) {
+        caller.StartCoroutine(IFadeOut(source, duration, endAction));
+    }
+
+    public static void FadeIn(this AudioSource source, float duration, MonoBehaviour caller) {
+        caller.StartCoroutine(IFadeIn(source, duration, null));
+    }
+
+    public static void FadeIn(this AudioSource source, float duration, Action endAction, MonoBehaviour caller) {
+        caller.StartCoroutine(IFadeIn(source, duration, endAction));
+    }
+
+    static IEnumerator IFadeOut(AudioSource source, float duration, Action endAction) {
+        float time = 0f;
+        while (time < duration) {
+            time += Time.unscaledDeltaTime;
+            source.volume = 1 - time / duration;
+            yield return null;
+        }
+        source.volume = 0f;
+        source.Stop();
+        if(endAction != null) endAction();
+    }
+
+    static IEnumerator IFadeIn(AudioSource source, float duration, Action endAction) {
+        source.Play();
+        float time = 0f;
+        while (time < duration) {
+            time += Time.unscaledDeltaTime;
+            source.volume = time / duration;
+            yield return null;
+        }
+        source.volume = 1f;
+        if (endAction != null) endAction();
     }
 }

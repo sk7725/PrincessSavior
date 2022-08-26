@@ -16,8 +16,19 @@ public class UI : MonoBehaviour
         o.Set(part);
     }
 
+    public static void CircleFade() {
+        Instantiate(main.prefabs.circleFade);
+    }
+
+    public static void CircleFade(bool fadeout, float duration = 1.5f, System.Action endAction = null) {
+        CircleFade o = Instantiate(main.prefabs.circleFade).GetComponent<CircleFade>();
+        o.fadeout = fadeout;
+        o.duration = duration;
+        o.endAction = endAction;
+    }
+
     [System.Serializable]
     public class UIPrefabs {
-        public GameObject partPopup;
+        public GameObject partPopup, circleFade;
     }
 }

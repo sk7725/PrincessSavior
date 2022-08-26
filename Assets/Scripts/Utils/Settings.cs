@@ -9,7 +9,8 @@ public class Settings
     private static int? _vMusic = null; //0-100
     private static int? _vSound = null; //0-100
     private static float? _flingSensitivity = null;
-    public static bool? _holdZoom = null;
+    private static bool? _holdZoom = null;
+    private static bool? _intro = null;
 
     private static string PrefsKey {
         get {
@@ -86,4 +87,21 @@ public class Settings
             }
         }
     }
+
+    
+    /*public static bool SawIntro {
+        get {
+            if (_intro == null) {
+                _intro = PlayerPrefs.GetInt($"{PrefsKey}.sawintro", 0) == 1;
+            }
+
+            return _intro.Value;
+        }
+        set {
+            if (_intro != value) {
+                _intro = value;
+                PlayerPrefs.SetInt($"{PrefsKey}.sawintro", value ? 1 : 0);
+            }
+        }
+    }*/
 }

@@ -52,7 +52,12 @@ public class TitleScene : MonoBehaviour {
         startButton.GetComponent<Image>().sprite = startPressed;
         audios.PlayOneShot(startSound);
         started = false;
-        StartCoroutine(IStartClicked());
+
+        bgm.FadeOut(1.2f, this);
+        UI.CircleFade(false, 1.5f, () => {
+            //SceneManager.LoadSceneAsync(skipIntro ? "GameScene" : "IntroScene"); //todo
+            SceneManager.LoadSceneAsync("IntroScene");
+        });
     }
 
     IEnumerator IStart() {
@@ -71,12 +76,6 @@ public class TitleScene : MonoBehaviour {
         float s = f * (1 - f) * 4f; //0 -> 1 -> 0
         if (f < 0.5f) return s * 1.5f;
         return 1 + s * 0.5f;
-    }
-
-    IEnumerator IStartClicked() {
-        //todo start black circle thingy, then transition scene
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadSceneAsync("GameScene");
     }
 
     IEnumerator IFlash(float duration) {
