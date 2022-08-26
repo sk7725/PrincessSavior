@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneButton : MonoBehaviour {
-    [SerializeField] private string scene;
-
+public class QuitButton : MonoBehaviour {
     void Start() {
+#if UNITY_IOS
+        gameObject.SetActive(false);
+#endif
         GetComponent<Button>().onClick.AddListener(Clicked);
     }
 
     private void Clicked() {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(scene);
+        Application.Quit();
     }
 }

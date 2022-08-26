@@ -27,13 +27,16 @@ public class PartPopup : MonoBehaviour
         clicked = false;
         nameText.text = part.localized;
         costText.text = part.cost.ToString();
-        yesb.interactable = GameControl.main.player.coins >= part.cost;
+        yesb.interactable = GameControl.main.player.coins >= part.cost && GameControl.main.player.state == PlayerControl.State.idle;
+        nob.interactable = GameControl.main.player.state == PlayerControl.State.idle;
         StartCoroutine(IOpen());
     }
 
     private void Update() {
         if (part == null || clicked) return;
-        yesb.interactable = GameControl.main.player.coins >= part.cost;
+        yesb.interactable = GameControl.main.player.coins >= part.cost && GameControl.main.player.state == PlayerControl.State.idle;
+        nob.interactable = GameControl.main.player.state == PlayerControl.State.idle;
+        if (GameControl.main.player.dead) ClickedNo();
     }
 
     private void ClickedYes() {

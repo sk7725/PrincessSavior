@@ -50,7 +50,7 @@ public class Settings
             if (_vMusic != value) {
                 _vMusic = value;
                 PlayerPrefs.SetInt($"{PrefsKey}.vmusic", value);
-                AudioControl.main.SetMusic(-_vMusic.Value / 100f);
+                AudioControl.main.SetMusic(_vMusic.Value / 100f);
             }
         }
     }

@@ -5,22 +5,25 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleScene : MonoBehaviour {
+    public GameObject logo;
     public GameObject[] afterStart;
     public RawImage flash;
     public Button startButton;
     public Sprite startPressed;
     public Image arrow;
-    public AudioSource audios; //todo sound
-    public AudioClip startSound;
+    public AudioSource audios, bgm; //todo sound
+    public AudioClip startSound, titleAppearSound;
 
     public float blinkRate = 1f;
     private bool started = false;
 
     private void Awake() {
+        Time.timeScale = 1f;
         started = false;
         foreach (GameObject go in afterStart) {
             go.SetActive(false);
         }
+        logo.transform.localScale = Vector3.zero;
 
         startButton.onClick.AddListener(StartClicked);
         StartCoroutine(IStart());
@@ -38,6 +41,8 @@ public class TitleScene : MonoBehaviour {
             go.SetActive(true);
         }
         StartCoroutine(IFlash(1f));
+        audios.PlayOneShot(titleAppearSound);
+        bgm.Play();
     }
 
     private void StartClicked() {
@@ -48,9 +53,21 @@ public class TitleScene : MonoBehaviour {
     }
 
     IEnumerator IStart() {
-        //todo logo movin'
-        yield return new WaitForSeconds(2f);
+        float duration = 1.5f;
+        float time = 0f;
+        while(time < duration) {
+            time += Time.deltaTime;
+            logo.transform.localScale = Vector3.one * Logof(time / duration);
+            yield return null;
+        }
+        logo.transform.localScale = Vector3.one;
         StartSequence();
+    }
+
+    float Logof(float f) {
+        float s = f * (1 - f) * 4f; //0 -> 1 -> 0
+        if (f < 0.5f) return s * 1.5f;
+        return 1 + s * 0.5f;
     }
 
     IEnumerator IStartClicked() {
