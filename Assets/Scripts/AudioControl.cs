@@ -24,7 +24,6 @@ public class AudioControl : MonoBehaviour {
     }
 
     public void SetMusic(float volume) {
-        Debug.Log(volume);
         mixer.SetFloat("vMusic", ToDecibel(volume));
     }
 
