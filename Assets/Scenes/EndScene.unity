@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &124853490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 175}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 1300, y: 200}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &124853491
@@ -274,6 +274,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: {fileID: 124853491}
+  format: 'Time {0}
+
+    <color=yellow>Best {1}</color>'
+  flipbook: {fileID: 515023770}
+--- !u!114 &515023770 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8633015145213505588, guid: 754051cc4b6989849833d20f835c0c19, type: 3}
+  m_PrefabInstance: {fileID: 8633015143978843252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5963611779e1b4ab3216011d4167c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &717857206
 GameObject:
   m_ObjectHideFlags: 0

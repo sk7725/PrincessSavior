@@ -54,6 +54,20 @@ public static class Extensions
         return null;
     }
 
+    public static string ToTimeString(this double time) {
+        if (time < 0) return "--:--.---";
+        int hours = (int)(time / 60 / 60);
+        return hours > 0 ? string.Format("{0}:{1,2:D2}:{2,2:D2}.{3,3:D3}", hours, (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000))
+            : string.Format("{0}:{1,2:D2}.{2,3:D3}", (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000));
+    }
+
+    public static string ToTimeString(this float time) {
+        if (time < 0) return "--:--.---";
+        int hours = (int)(time / 60 / 60);
+        return hours > 0 ? string.Format("{0}:{1,2:D2}:{2,2:D2}.{3,3:D3}", hours, (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000))
+            : string.Format("{0}:{1,2:D2}.{2,3:D3}", (int)(time / 60 % 60), (int)(time % 60), (int)(time * 1000 % 1000));
+    }
+
     public static void FadeOut(this AudioSource source, float duration, MonoBehaviour caller) {
         caller.StartCoroutine(IFadeOut(source, duration, null));
     }

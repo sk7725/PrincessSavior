@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class DanaDoor : MonoBehaviour {
     public string endScene = "EndScene";
+    private bool ended = false;
+
+    private void Awake() {
+        ended = false;
+    }
 
     private void OnTriggerStay(Collider other) {
+        if (ended) return;
         if (other.CompareTag("Sword")) {
             Rigidbody sword = GameControl.main.player.sword.rigid;
             Vector3 v = sword.velocity;
@@ -15,6 +21,7 @@ public class DanaDoor : MonoBehaviour {
         }
         else if (other.CompareTag("Player") && GameControl.main.player.state == PlayerControl.State.idle && GameControl.main.player.landed) {
             GameControl.Pause();
+            ended = true;
             AudioControl.main.music.FadeOut(1f, this);
             Settings.TimeRecord = (float)NumberFrame.time;
             if(Settings.TimeRecord > 15f && (Settings.BestTimeRecord <= 15f || Settings.TimeRecord < Settings.BestTimeRecord)) Settings.BestTimeRecord = Settings.TimeRecord;

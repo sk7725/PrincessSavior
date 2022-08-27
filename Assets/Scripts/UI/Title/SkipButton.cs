@@ -30,7 +30,7 @@ public class SkipButton : MonoBehaviour {
         group.alpha = Mathf.Clamp01((time - 1.5f) / 2f);
 
         if (flipbook.ended) {
-            text.text =stringEnded;
+            text.text = stringEnded;
             text.color = Color.yellow;
         }
     }
