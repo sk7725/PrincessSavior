@@ -47,10 +47,14 @@ public class MenuDialog : Dialog
             if (p.page == page) {
                 p.pageObject.SetActive(true);
                 p.buttonImage.color = Color.white;
+                p.buttonRect.SetLeft(-20);
+                p.buttonRect.SetRight(20);
             }
             else {
                 p.pageObject.SetActive(false);
                 p.buttonImage.color = disabledColor;
+                p.buttonRect.SetLeft(0);
+                p.buttonRect.SetRight(0);
             }
         }
     }
@@ -61,5 +65,6 @@ public class MenuDialog : Dialog
         public GameObject pageObject;
         public Button button;
         public Image buttonImage;
+        public RectTransform buttonRect;
     }
 }

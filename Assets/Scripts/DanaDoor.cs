@@ -22,9 +22,19 @@ public class DanaDoor : MonoBehaviour {
         else if (other.CompareTag("Player") && GameControl.main.player.state == PlayerControl.State.idle && GameControl.main.player.landed) {
             GameControl.Pause();
             ended = true;
+            EndingData.NewEndingData();
+
             AudioControl.main.music.FadeOut(1f, this);
+
+            //time record
             Settings.TimeRecord = (float)NumberFrame.time;
-            if(Settings.TimeRecord > 15f && (Settings.BestTimeRecord <= 15f || Settings.TimeRecord < Settings.BestTimeRecord)) Settings.BestTimeRecord = Settings.TimeRecord;
+            if(GameControl.main.player.accessory.name == "TrialPearl") {
+                if (Settings.TimeRecord > 15f && (Settings.BestPearlTimeRecord <= 15f || Settings.TimeRecord < Settings.BestPearlTimeRecord)) Settings.BestPearlTimeRecord = Settings.TimeRecord;
+            }
+            else {
+                if (Settings.TimeRecord > 15f && (Settings.BestTimeRecord <= 15f || Settings.TimeRecord < Settings.BestTimeRecord)) Settings.BestTimeRecord = Settings.TimeRecord;
+            }
+            
 
             UI.CircleFade(false, 2f, () => {
                 Time.timeScale = 1f;

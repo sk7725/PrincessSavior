@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - FxTemporaire
   - AudioBroadcaster
+  - LastEndingData
   layers:
   - Default
   - TransparentFX

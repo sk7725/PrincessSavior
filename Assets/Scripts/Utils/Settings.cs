@@ -12,6 +12,7 @@ public class Settings
     private static bool? _holdZoom = null;
     private static float? _time = null;
     public static float? _bestTime = null; //todo set to double
+    public static float? _bestTimePearl = null;
 
     private static string PrefsKey {
         get {
@@ -117,6 +118,22 @@ public class Settings
             if (_bestTime != value) {
                 _bestTime = value;
                 PlayerPrefs.SetFloat($"{PrefsKey}.btime", value);
+            }
+        }
+    }
+
+    public static float BestPearlTimeRecord {
+        get {
+            if (_bestTimePearl == null) {
+                _bestTimePearl = PlayerPrefs.GetFloat($"{PrefsKey}.bptime", -1f);
+            }
+
+            return _bestTimePearl.Value;
+        }
+        set {
+            if (_bestTimePearl != value) {
+                _bestTimePearl = value;
+                PlayerPrefs.SetFloat($"{PrefsKey}.bptime", value);
             }
         }
     }

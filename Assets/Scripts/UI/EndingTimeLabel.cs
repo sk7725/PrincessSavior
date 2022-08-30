@@ -15,7 +15,14 @@ public class EndingTimeLabel : MonoBehaviour {
     void Update() {
         if (flipbook.ended && !time.enabled) {
             time.enabled = true;
-            time.text = string.Format(format, Settings.TimeRecord.ToTimeString(), Settings.BestTimeRecord.ToTimeString());
+            string f = format;
+            if (EndingData.GetEndingData().accessory.name == "TrialPearl") {
+                f = f.Replace("<color=yellow>", "<color=red>");
+                time.text = string.Format(f, Settings.TimeRecord.ToTimeString(), Settings.BestPearlTimeRecord.ToTimeString());
+            }
+            else {
+                time.text = string.Format(f, Settings.TimeRecord.ToTimeString(), Settings.BestTimeRecord.ToTimeString());
+            }
         }
     }
 }
