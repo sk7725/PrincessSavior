@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 7a425731a094c734eb69904d8d7cd542, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -4700,6 +4700,7 @@ MonoBehaviour:
   throwOffset: {x: 0, y: 0}
   throwRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   maxHealth: 100
+  maxGems: 0
   defaultGravity: -18
   blade: {fileID: 11400000, guid: e7fde9de4b5ee224abdacea16dade458, type: 2}
   handle: {fileID: 11400000, guid: 0a2909dd087091e42a6ab9a7c3438de7, type: 2}
@@ -4737,6 +4738,7 @@ MonoBehaviour:
   audios: {fileID: 0}
   health: 0
   coins: 0
+  gems: 0
   dragged: 0
 --- !u!82 &577031522
 AudioSource:

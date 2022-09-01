@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Vector2 throwOffset;
     [SerializeField] private Quaternion throwRotation = Quaternion.identity;
     public float maxHealth = 100f;
+    [HideInInspector] public int maxGems = 0; //set by gem items
     public float defaultGravity = -18f;
 
     [Header("Sword Parts")]
@@ -58,6 +59,7 @@ public class PlayerControl : MonoBehaviour
 
     public float health;
     public int coins = 0;
+    public int gems = 0;
     [System.NonSerialized] public bool swordPopupActive = false, dead = false;
     private float invincibility;
 
@@ -83,6 +85,7 @@ public class PlayerControl : MonoBehaviour
         audios = GetComponent<AudioSource>();
         health = maxHealth;
         Physics.gravity = Vector2.up * defaultGravity;
+        maxGems = 0;
     }
 
     void Start()
@@ -100,6 +103,7 @@ public class PlayerControl : MonoBehaviour
         landed = pounding = false;
         swordPopupActive = false;
         coins = 0;
+        gems = 0;
 
         animator.Trig(Trigger.upgrade);
     }

@@ -6,7 +6,7 @@ public class EndingData : MonoBehaviour {
     public Blade blade;
     public Handle handle;
     public Accessory accessory;
-    public int gems;
+    public int gems, maxGems;
     public int swordParts;
 
     public static void NewEndingData() {
@@ -27,5 +27,7 @@ public class EndingData : MonoBehaviour {
         blade = player.blade;
         handle = player.handle;
         accessory = player.accessory;
+        gems = player.gems;
+        maxGems = player.maxGems;
     }
 }

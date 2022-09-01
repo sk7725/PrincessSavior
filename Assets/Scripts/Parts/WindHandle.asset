@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WindHandle
   m_EditorClassIdentifier: 
   localized: "\uBC14\uB78C\uC758 \uCE7C\uC790\uB8E8"
-  description: "\uAC80\uC5D0\uAC8C \uC57D\uAC04\uC758 \uC591\uB825\uC744 \uAC00\uD569\uB2C8\uB2E4."
+  description: "\uAC80\uC5D0 \uC57D\uAC04\uC758 \uC591\uB825\uC744 \uAC00\uD569\uB2C8\uB2E4."
   cost: 15
   mesh: {fileID: 3436102675129614751, guid: 0d06f9845ecce7c4a84674870224b888, type: 3}
   materials:

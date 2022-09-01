@@ -182,12 +182,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time 00:00.000
-
-    Best 00:00.000'
+  m_text: "Time 00:00.000 <color=#ea63ff>\uE0051/5</color>\nBest 00:00.000"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: edc37b8f84a935d4ea2bc892ddd04e2f, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: a4adb9b7a3944534cba65a7cfed913be, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eb1e48be51b7ea240b6bd0e1fbaf8b39, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 340905205d1ed9d4fbeadf8a87e85958, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -274,9 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: {fileID: 124853491}
-  format: 'Time {0}
-
-    <color=yellow>Best {1}</color>'
+  format: "Time {0} <color=#ea63ff>\uE005{2}/{3}</color>\n<color=yellow>Best {1}</color>"
   flipbook: {fileID: 515023770}
 --- !u!114 &515023770 stripped
 MonoBehaviour:
