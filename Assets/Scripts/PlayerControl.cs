@@ -218,7 +218,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void UpdateInput() {
-        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen() && !EventSystem.current.IsPointerOverGameObject() && !ZoomButton.pressed;
+        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen() && !EventSystem.current.IsPointerOverGameObject(Input.touchCount > 0 ? Input.GetTouch(0).fingerId : -1) && !ZoomButton.pressed;
 
         switch (state) {
             case State.idle:
