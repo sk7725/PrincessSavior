@@ -16996,7 +16996,7 @@ MonoBehaviour:
   musicData:
   - minHeight: -100
     clip: {fileID: 8300000, guid: 28c29dd7420188748adba8c107497ee0, type: 3}
-  - minHeight: 300
+  - minHeight: 265
     clip: {fileID: 8300000, guid: aab86952ea921c2439a2e70846602816, type: 3}
 --- !u!1 &2085607938
 GameObject:

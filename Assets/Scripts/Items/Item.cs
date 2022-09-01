@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
-{
+public class Item : MonoBehaviour {
+    private const float RESPAWN_DIST2 = 100f;
+
     [Header("Preset Fields")]
     [SerializeField] private MagnetRange magnetRange;
 
@@ -14,8 +15,15 @@ public class Item : MonoBehaviour
     [SerializeField] private float rotateSpeed = 150f;
     [SerializeField] private GameObject hitFx = null;
 
+    [SerializeField] private bool respawns = false;
+    [SerializeField] private bool autoRespawn = false;
+    [SerializeField] private GameObject respawnFx = null;
+
     private bool magnetized;
     private float magSpeed;
+
+    private bool collected = false;
+    private Vector3 respawnPos;
 
     private void Awake() {
         magnetized = false;
@@ -23,14 +31,34 @@ public class Item : MonoBehaviour
         if (magnetRange != null) magnetRange.item = this;
     }
 
-    protected virtual void Start()
-    {
+    protected virtual void Respawn() {
         magnetized = false;
-        transform.rotation = Quaternion.Euler(0, rotateSpeed * (transform.position.x + transform.position.y), 0);
+        magSpeed = 0;
+        collected = false;
+        transform.position = respawnPos;
+        foreach (Transform c in transform) {
+            c.gameObject.SetActive(true);
+        }
+        if (magnetRange != null) magnetRange.Unmagnetize();
+
+        GameControl.main.player.Fx(respawnFx, transform.position, Quaternion.identity);
     }
 
-    protected virtual void LateUpdate()
-    {
+    protected virtual void Start() {
+        magnetized = false;
+        collected = false;
+        transform.rotation = Quaternion.Euler(0, rotateSpeed * (transform.position.x + transform.position.y), 0);
+        respawnPos = transform.position;
+    }
+
+    protected virtual void LateUpdate() {
+        if (collected) {
+            if (autoRespawn && (GameControl.main.player.PlayerPos() - transform.position).sqrMagnitude > RESPAWN_DIST2 && (GameControl.main.player.transform.position - transform.position).sqrMagnitude > RESPAWN_DIST2 && !GameControl.main.player.swordPopupActive) {
+                Respawn();
+            }
+            return;
+        }
+
         if (rotateSpeed != 0f) {
             Vector3 rot = transform.rotation.eulerAngles;
             transform.rotation = Quaternion.Euler(rot.x, rot.y + rotateSpeed * Time.deltaTime, rot.z);
@@ -41,18 +69,25 @@ public class Item : MonoBehaviour
                 //stop magging
                 magSpeed = 0;
                 magnetized = false;
-                magnetRange.Unmagnetize();
+                if (magnetRange != null) magnetRange.Unmagnetize();
             }
-            magSpeed += Time.deltaTime * 8f;
-            if (magSpeed > magnetStrength) magSpeed = magnetStrength;
+            //magSpeed += Time.deltaTime * 8f;
+            //if (magSpeed > magnetStrength) magSpeed = magnetStrength;
+            magSpeed = magnetStrength;
             transform.position = Vector3.MoveTowards(transform.position, GameControl.main.player.PlayerPos(), Time.deltaTime * magSpeed);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!GameControl.main.player.dead && CanCollect() && (other.CompareTag("Player") || other.CompareTag("Sword"))) {
+        if (!collected && !GameControl.main.player.dead && CanCollect() && (other.CompareTag("Player") || other.CompareTag("Sword"))) {
             OnCollect();
-            Destroy(gameObject);
+            if (respawns) {
+                collected = true;
+                foreach (Transform c in transform) {
+                    c.gameObject.SetActive(false);
+                }
+            }
+            else Destroy(gameObject);
         }
     }
 
@@ -69,7 +104,7 @@ public class Item : MonoBehaviour
     }
 
     public virtual bool DoMagnet() {
-        return healAmount <= 0.1f || GameControl.main.player.health < GameControl.main.player.maxHealth;
+        return !collected && (healAmount <= 0.1f || GameControl.main.player.health < GameControl.main.player.maxHealth);
     }
 
     public virtual void EnableMagnet() {

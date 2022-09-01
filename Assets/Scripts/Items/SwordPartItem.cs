@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SwordPartItem : Item
-{
+public class SwordPartItem : Item {
     [Header("Sword Part")]
     [SerializeField] private SwordModel model;
     [SerializeField] private Blade blade;
@@ -36,14 +35,31 @@ public class SwordPartItem : Item
         pm.startColor = GetColor();
     }
 
+    protected override void Respawn() {
+        base.Respawn();
+        particle.Play();
+    }
+
     public override bool CanCollect() {
-        return base.CanCollect() && !GameControl.main.player.swordPopupActive;
+        return base.CanCollect() && !GameControl.main.player.swordPopupActive && CompareParts();
+    }
+
+    public override bool DoMagnet() {
+        return base.DoMagnet() && CompareParts();
+    }
+
+    private bool CompareParts() {
+        PlayerControl player = GameControl.main.player;
+        if (blade != null) return blade != player.blade;
+        if (handle != null) return handle != player.handle;
+        return accessory != player.accessory;
     }
 
     public override void OnCollect() {
         base.OnCollect();
         UI.PartPopup(blade != null ? blade : (handle != null ? handle : accessory));
         GameControl.main.player.swordPopupActive = true;
+        particle.Stop();
     }
 
     private Color GetColor() {

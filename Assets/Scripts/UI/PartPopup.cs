@@ -12,6 +12,7 @@ public class PartPopup : MonoBehaviour
 
     private SwordPart part = null;
     private bool clicked = false;
+    private bool wasIdle = false;
 
     private void Awake() {
         transform.SetParent(GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>().transform, false);
@@ -20,6 +21,7 @@ public class PartPopup : MonoBehaviour
     private void Start() {
         yesb.onClick.AddListener(ClickedYes);
         nob.onClick.AddListener(ClickedNo);
+        wasIdle = false;
     }
 
     public void Set(SwordPart part) {
@@ -37,6 +39,11 @@ public class PartPopup : MonoBehaviour
         yesb.interactable = GameControl.main.player.coins >= part.cost && GameControl.main.player.state == PlayerControl.State.idle;
         nob.interactable = GameControl.main.player.state == PlayerControl.State.idle;
         if (GameControl.main.player.dead) ClickedNo();
+
+        if (wasIdle) {
+            if (GameControl.main.player.state != PlayerControl.State.idle) ClickedNo();
+        }
+        else if (GameControl.main.player.state == PlayerControl.State.idle) wasIdle = true;
     }
 
     private void ClickedYes() {

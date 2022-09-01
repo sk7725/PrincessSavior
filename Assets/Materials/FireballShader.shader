@@ -14,6 +14,7 @@ Shader "Unlit/Fireball"
         LOD 100
         Blend SrcAlpha OneMinusSrcAlpha
         ZTest Always
+        ZWrite Off
 
         //main
         Pass

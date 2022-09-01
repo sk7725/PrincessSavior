@@ -7,7 +7,7 @@ Shader "Custom/FadeCircle"
     }
     SubShader
     {
-        Tags { "RenderType"="Trnasparent" }
+        Tags { "RenderType"="Transparent" }
         LOD 100
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Off
