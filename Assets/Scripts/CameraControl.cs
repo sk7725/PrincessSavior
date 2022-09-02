@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour
     public const float MIN_Y = 3;
     [SerializeField] private Vector3 playerCameraOffset;
     [SerializeField] private float cameraSpeed = 2f;
+    [SerializeField] private Vector2 xBounds = new Vector2(-300f, 380f);
 
     public Vector3 targetPos, currentOffset, targetOffset;
 
@@ -26,6 +27,8 @@ public class CameraControl : MonoBehaviour
         }
 
         if(targetPos.y < MIN_Y) targetPos.y = MIN_Y;
+        if(targetPos.x < xBounds.x) targetPos.x = xBounds.x;
+        if(targetPos.x > xBounds.y) targetPos.x = xBounds.y;
 
         currentOffset = Vector3.Lerp(currentOffset, targetOffset, Time.deltaTime * cameraSpeed);
 

@@ -8,7 +8,7 @@ using static PlayerRenderer;
 public class PlayerControl : MonoBehaviour
 {
     public const float MIN_DRAG_LEN2 = 0.2f, HEIGHT = 2f;
-    private const float INVIN_TIME = 0.5f, DEATH_BARRIER = -40f;
+    private const float INVIN_TIME = 0.5f, DEATH_BARRIER = -10f;
 
     [Header("Settings")]
     public float poundStr = 5f;
@@ -218,7 +218,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void UpdateInput() {
-        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen() && !EventSystem.current.IsPointerOverGameObject(Input.touchCount > 0 ? Input.GetTouch(0).fingerId : -1) && !ZoomButton.pressed;
+        bool pressed = Input.GetMouseButton(0) && !GameControl.main.DialogOpen() && (dragged || !EventSystem.current.IsPointerOverGameObject(Input.touchCount > 0 ? Input.GetTouch(0).fingerId : -1)) && !ZoomButton.pressed;
 
         switch (state) {
             case State.idle:
