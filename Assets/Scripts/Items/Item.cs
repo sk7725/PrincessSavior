@@ -81,8 +81,8 @@ public class Item : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (!collected && !GameControl.main.player.dead && CanCollect() && (other.CompareTag("Player") || other.CompareTag("Sword"))) {
             OnCollect();
+            collected = true;
             if (respawns) {
-                collected = true;
                 foreach (Transform c in transform) {
                     c.gameObject.SetActive(false);
                 }
