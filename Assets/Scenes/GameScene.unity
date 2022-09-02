@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 7a425731a094c734eb69904d8d7cd542, type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -7269,7 +7269,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!108 &705507994
 Light:
@@ -14717,6 +14717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCameraOffset: {x: 0, y: 2, z: -13}
   cameraSpeed: 5
+  xBounds: {x: -300, y: 380}
   targetPos: {x: 0, y: 0, z: 0}
   currentOffset: {x: 0, y: 0, z: 0}
   targetOffset: {x: 0, y: 0, z: 0}
@@ -18075,6 +18076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endScene: EndScene
+  trueEndScene: TrueEndScene
 --- !u!1001 &2899861490919609582
 PrefabInstance:
   m_ObjectHideFlags: 0
