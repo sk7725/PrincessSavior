@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DanaDoor : MonoBehaviour {
-    public string endScene = "EndScene";
+    public string endScene = "EndScene", trueEndScene = "TrueEndScene";
     private bool ended = false;
 
     private void Awake() {
@@ -22,6 +22,7 @@ public class DanaDoor : MonoBehaviour {
         else if (other.CompareTag("Player") && GameControl.main.player.state == PlayerControl.State.idle && GameControl.main.player.landed) {
             GameControl.Pause();
             ended = true;
+            bool trueEnd = GameControl.main.player.gems >= GameControl.main.player.maxGems;
             EndingData.NewEndingData();
 
             AudioControl.main.music.FadeOut(1f, this);
@@ -38,7 +39,7 @@ public class DanaDoor : MonoBehaviour {
 
             UI.CircleFade(false, 2f, () => {
                 Time.timeScale = 1f;
-                SceneManager.LoadSceneAsync(endScene);
+                SceneManager.LoadSceneAsync(trueEnd ? trueEndScene : endScene);
             });
         }
     }
