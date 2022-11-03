@@ -8,8 +8,8 @@ public class TitleScene : MonoBehaviour {
     public GameObject logo;
     public GameObject[] afterStart;
     public RawImage flash;
-    public Button startButton;
-    public Sprite startPressed;
+    //public Button startButton;
+    //public Sprite startPressed;
     public Image arrow;
     public AudioSource audios, bgm, drumroll; //todo sound
     public AudioClip startSound, titleAppearSound;
@@ -25,7 +25,7 @@ public class TitleScene : MonoBehaviour {
         }
         logo.transform.localScale = Vector3.zero;
 
-        startButton.onClick.AddListener(StartClicked);
+        //startButton.onClick.AddListener(StartClicked);
         StartCoroutine(IStart());
     }
 
@@ -46,7 +46,7 @@ public class TitleScene : MonoBehaviour {
         bgm.Play();
     }
 
-    private void StartClicked() {
+    /*private void StartClicked() {
         if (pressedStart) return;
         pressedStart = true;
         startButton.GetComponent<Image>().sprite = startPressed;
@@ -58,7 +58,7 @@ public class TitleScene : MonoBehaviour {
             //SceneManager.LoadSceneAsync(skipIntro ? "GameScene" : "IntroScene"); //todo
             SceneManager.LoadSceneAsync("IntroScene");
         });
-    }
+    }*/
 
     IEnumerator IStart() {
         float duration = 1.5f;

@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour {
     [SerializeField] private float showTime = 4f; //Iiiiiiit's showtime!
 
     private float time = 0;
-    private float deltaHp;
+    private float deltaHp, zOffset;
 
     void Start() {
         visualFrame.SetActive(false);

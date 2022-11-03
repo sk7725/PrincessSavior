@@ -14,9 +14,25 @@ public class MeshSeparator
 
         for (int i = 0; i < mesh.subMeshCount; i++) {
             Mesh sub = mesh.GenerateSubMesh(i);
-            AssetDatabase.CreateAsset(sub, string.Format("{0}/{1}_s{2}.mesh", path, Selection.activeGameObject.name, i));
+            //AssetDatabase.CreateAsset(sub, string.Format("{0}/{1}_s{2}.mesh", path, Selection.activeGameObject.name, i));
+            CreateorUpdateMesh(sub, string.Format("{0}/{1}_s{2}.mesh", path, Selection.activeGameObject.name, i));
         }
         AssetDatabase.SaveAssets();
+    }
+
+    private static void CreateorUpdateMesh(Mesh sub, string path)
+    {
+        Mesh existing = AssetDatabase.LoadAssetAtPath<Mesh>(path);
+        if (existing != null)
+        {
+            //update mesh
+            EditorUtility.CopySerialized(sub, existing);
+        }
+        else
+        {
+            //create mesh
+            AssetDatabase.CreateAsset(sub, path);
+        }
     }
 
     private static string PrepareFolder(string name) {

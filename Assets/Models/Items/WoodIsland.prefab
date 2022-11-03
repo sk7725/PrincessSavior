@@ -111,8 +111,8 @@ Transform:
   m_GameObject: {fileID: 6184310916376626353}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.5, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2912223440590637671}
   m_Father: {fileID: 0}
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 6019086280811597010}
-  duration: 3
-  shakeDuration: 2
+  duration: 1.5
+  shakeDuration: 1
   respawn: 3
   shake: 0.2
   breakFx: {fileID: 1040608886635896, guid: e96676cdebe84d54b8ac65c27fd92937, type: 3}
