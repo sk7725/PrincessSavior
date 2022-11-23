@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static LevelUtils;
+
+/// <summary>
+/// Stored data about the last game. Is created on level clear (by DanaDoor); is destroyed when a new EndingData is instantiated.
+/// </summary>
 public class EndingData : MonoBehaviour {
     public Blade blade;
     public Handle handle;
     public Accessory accessory;
     public int gems, maxGems;
     public int swordParts;
+    public Level level;
 
     public static void NewEndingData() {
         GameObject e = GameObject.FindGameObjectWithTag("LastEndingData");
@@ -29,5 +35,20 @@ public class EndingData : MonoBehaviour {
         accessory = player.accessory;
         gems = player.gems;
         maxGems = player.maxGems;
+
+        LevelData ld = LevelData.Current();
+        level = ld.level;
+        Destroy(ld.gameObject);
+    }
+
+    public RecordType GetRecordType() {
+        if (accessory.name == "TrialPearl") {
+            if (gems >= maxGems) return RecordType.pearlPerfect;
+            return RecordType.pearl;
+        }
+        else {
+            if (gems >= maxGems) return RecordType.perfect;
+            return RecordType.normal;
+        }
     }
 }

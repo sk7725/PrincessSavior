@@ -11,10 +11,9 @@ public class Settings
     private static float? _flingSensitivity = null;
     private static bool? _holdZoom = null;
     private static float? _time = null;
-    public static float? _bestTime = null; //todo set to double
-    public static float? _bestTimePearl = null;
+    private static int? _lastLevel = null;
 
-    private static string PrefsKey {
+    public static string PrefsKey {
         get {
             if (string.IsNullOrEmpty(_prefsKey)) {
                 _prefsKey = $"{SystemInfo.deviceUniqueIdentifier}.{Application.companyName}.{Application.productName}.settings";
@@ -106,6 +105,23 @@ public class Settings
         }
     }
 
+    public static int LastLevel {
+        get {
+            if (_lastLevel == null) {
+                _lastLevel = PlayerPrefs.GetInt($"{PrefsKey}.ll", 0);
+            }
+
+            return _lastLevel.Value;
+        }
+        set {
+            if (_lastLevel != value) {
+                _lastLevel = value;
+                PlayerPrefs.GetInt($"{PrefsKey}.ll", value);
+            }
+        }
+    }
+
+    /*
     public static float BestTimeRecord {
         get {
             if (_bestTime == null) {
@@ -136,7 +152,7 @@ public class Settings
                 PlayerPrefs.SetFloat($"{PrefsKey}.bptime", value);
             }
         }
-    }
+    }*/
 
 
     /*public static bool SawIntro {

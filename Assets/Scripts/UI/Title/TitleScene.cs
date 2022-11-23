@@ -15,11 +15,11 @@ public class TitleScene : MonoBehaviour {
     public AudioClip startSound, titleAppearSound;
 
     public float blinkRate = 1f;
-    private bool started = false, pressedStart = false;
+    private bool started = false;
 
     private void Awake() {
         Time.timeScale = 1f;
-        started = pressedStart = false;
+        started = false;
         foreach (GameObject go in afterStart) {
             go.SetActive(false);
         }

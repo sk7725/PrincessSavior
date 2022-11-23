@@ -571,6 +571,10 @@ PrefabInstance:
       value: TitleScene
       objectReference: {fileID: 0}
     - target: {fileID: 8633015145012033342, guid: 754051cc4b6989849833d20f835c0c19, type: 3}
+      propertyPath: destination
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8633015145012033342, guid: 754051cc4b6989849833d20f835c0c19, type: 3}
       propertyPath: stringEnded
       value: THE END?
       objectReference: {fileID: 0}

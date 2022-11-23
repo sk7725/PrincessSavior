@@ -242,6 +242,7 @@ MonoBehaviour:
   text: {fileID: 8633015145150955752}
   flipbook: {fileID: 8633015145213505588}
   stringEnded: START
+  destination: 0
   scene: GameScene
   fade: 1
 --- !u!1 &8633015145150955758

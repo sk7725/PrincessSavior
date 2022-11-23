@@ -11,6 +11,14 @@ public class SkipButton : MonoBehaviour {
     [SerializeField] private FlipbookPlayer flipbook;
     [SerializeField] private string stringEnded = "START";
 
+    public enum SkipDestination {
+        game,
+        title,
+        custom
+    }
+
+    [SerializeField] private SkipDestination destination = SkipDestination.custom;
+
     [SerializeField] private string scene;
     [SerializeField] private bool fade = false;
 
@@ -36,6 +44,17 @@ public class SkipButton : MonoBehaviour {
         }
     }
 
+    private string DestinationScene() {
+        switch (destination) {
+            case SkipDestination.game:
+                return LevelData.Current().level.gameScene;
+            case SkipDestination.title:
+                return "TitleScene";
+            default:
+                return scene;
+        }
+    }
+
     private void Clicked() {
         if(flipbook.ended) NextScene();
         flipbook.ended = true;
@@ -45,6 +64,7 @@ public class SkipButton : MonoBehaviour {
     private void NextScene() {
         if (clicked) return;
         clicked = true;
+        string scene = DestinationScene();
 
         if (fade) {
             if (AudioControl.main.music != null) AudioControl.main.music.FadeOut(1.2f, this);
