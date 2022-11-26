@@ -26,7 +26,7 @@ public class LevelSelectFrame : MonoBehaviour {
 
     private void SetUI(Level level) {
         levelNameText.text = level.name;
-        levelGemsText.text = string.Format("ɦ{0}/{1}", LevelUtils.GetGems(level.id), level.maxGems);
+        levelGemsText.text = string.Format("\ue005{0}/{1}", LevelUtils.GetGems(level.id), level.maxGems);
     }
 
     private void PrepareList() {
