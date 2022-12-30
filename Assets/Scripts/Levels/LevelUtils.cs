@@ -76,4 +76,13 @@ public static class LevelUtils {
         }
         PlayerPrefs.SetInt($"{PrefsKey}.{levelID}.g", value);
     }
+
+    public static bool IsUnlocked(Level level) {
+        if (level.alwaysUnlocked) return true;
+        return PlayerPrefs.GetInt($"{PrefsKey}.{level.id}.ul", 0) == 1;
+    }
+
+    public static void SetUnlocked(Level level, bool value) {
+        PlayerPrefs.SetInt($"{PrefsKey}.{level.id}.ul", value ? 1 : 0);
+    }
 }

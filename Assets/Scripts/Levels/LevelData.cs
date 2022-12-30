@@ -13,7 +13,7 @@ public class LevelData : MonoBehaviour
         GameObject e = GameObject.FindGameObjectWithTag("LastLevelData");
         if (e != null) Destroy(e);
         e = new GameObject("LevelData");
-        e.tag = "LastEndingData";
+        e.tag = "LastLevelData";
         e.AddComponent<LevelData>().level = level;
         DontDestroyOnLoad(e);
     }

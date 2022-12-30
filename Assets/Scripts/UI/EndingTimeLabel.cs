@@ -28,7 +28,7 @@ public class EndingTimeLabel : MonoBehaviour {
             if (endingData.accessory.name == "TrialPearl") {
                 f = f.Replace("<color=yellow>", "<color=red>");
             }
-            bestTime = LevelUtils.GetRecord(LevelData.Current().level.id, endingData.GetRecordType()).ToTimeString();
+            bestTime = LevelUtils.GetRecord(endingData.level.id, endingData.GetRecordType()).ToTimeString();
             time.text = string.Format(f, Settings.TimeRecord.ToTimeString(), bestTime, endingData.gems, endingData.maxGems);
         }
     }

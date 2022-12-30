@@ -11,6 +11,7 @@ TagManager:
   - FxTemporaire
   - AudioBroadcaster
   - LastEndingData
+  - LastLevelData
   layers:
   - Default
   - TransparentFX

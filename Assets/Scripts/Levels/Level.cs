@@ -15,4 +15,11 @@ public class Level : ScriptableObject {
     public int maxGems = 5;
 
     public GameObject previewPrefab;
+
+    public bool alwaysUnlocked = false;
+    public bool hidden = false;
+
+    public bool IsHidden() {
+        return hidden; //will be useful later for seasonal levels (probably)
+    }
 }

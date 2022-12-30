@@ -19,3 +19,5 @@ MonoBehaviour:
   trueEndScene: TrueEndScene
   maxGems: 5
   previewPrefab: {fileID: 6214968810745527989, guid: 693c8c79e8c9b224c909b70efd9dae34, type: 3}
+  alwaysUnlocked: 1
+  hidden: 0
